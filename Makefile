@@ -2,7 +2,7 @@ CC=gcc
 FLEX=flex
 BISON=bison
 
-CFLAGS=-O2 -Wall -std=c99
+CFLAGS=-O2 -Wall -Wextra -Werror -Wfloat-equal -Wformat=2 -g -std=c99
 #LDFLAGS=
 
 src = $(wildcard src/*.c)
