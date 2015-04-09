@@ -68,6 +68,6 @@ Vagrant.configure(2) do |config|
     sudo apt-get update
     sudo add-apt-repository ppa:ubuntu-toolchain-r/test
     sudo apt-get update
-    sudo apt-get install -y gcc-4.9 flex bison
+    sudo apt-get install -y gcc-4.9 flex bison git
   SHELL
 end
