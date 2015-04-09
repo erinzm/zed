@@ -67,3 +67,6 @@ Session.vim
 
 # sftp configuration file
 sftp-config.json
+
+### Vagrant ###
+.vagrant/
