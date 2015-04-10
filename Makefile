@@ -5,8 +5,9 @@ BISON=bison
 CFLAGS=-O2 -Wall -Wextra -Werror -Wfloat-equal -Wformat=2 -g -std=c99
 #LDFLAGS=
 
-src = $(wildcard src/*.c)
-obj = $(src:.c=.o)
+csrc = $(wildcard src/c/*.c)
+flexsrc = $(wildcard src/flex/*.l)
+obj = $(csrc:.c=.o)
 dep = $(obj:.o=.d)
 
 compilerinaweek: $(obj)
