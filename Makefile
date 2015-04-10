@@ -5,8 +5,8 @@ BISON=bison
 CFLAGS=-O2 -Wall -Wextra -Werror -Wfloat-equal -Wformat=2 -g -std=c99
 #LDFLAGS=
 
-csrc = $(wildcard src/c/*.c)
-flexsrc = $(wildcard src/flex/*.l)
+csrc = $(wildcard src/*.c)
+flexsrc = $(wildcard src/*.l)
 obj = $(csrc:.c=.o)
 dep = $(obj:.o=.d)
 
