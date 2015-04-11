@@ -28,13 +28,6 @@ compilerinaweek: $(cobj) $(flexc)
 %.d: %.c
 	@$(CC) $(CFLAGS) $< -MM -MT $(@:.d=.o) >$@
 
-.PHONY: cleanall
-cleanall: clean cleancdep
-
 .PHONY: clean
 clean:
-	rm -f $(cobj) $(flexc) compilerinaweek
-
-.PHONY: cleancdep
-cleancdep:
-	rm -f $(cdep)
+	rm -f $(cobj) $(cdep) $(flexc) compilerinaweek
