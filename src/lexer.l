@@ -23,12 +23,12 @@ void yyerror(char *s, ...);
 %%
 
   /* keywords */
-fn                      {return FN;}
-if                      {return IF;}
-else                    {return ELSE;}
-for                     {return FOR;}
-return                  {return RETURN;}
-const                   {return CONST;}
+"fn"                      {return FN;}
+"if"                      {return IF;}
+"else"                    {return ELSE;}
+"for"                     {return FOR;}
+"return"                  {return RETURN;}
+"const"                   {return CONST;}
 
   /* assignment, arithmetic, ordering, binops, and numtests */
     /*assignment*/
