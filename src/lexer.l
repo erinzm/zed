@@ -30,7 +30,31 @@ for                     {return FOR;}
 return                  {return RETURN;}
 const                   {return CONST;}
 
-
+  /* assignment, arithmetic, ordering, binops, and numtests */
+    /*assignment*/
+"="                     {return SETEQ;}
+    /*comparison*/
+"=="                    {return ISEQ;}
+"!="                    {return ISNEQ;}
+"<"                     {return ISLT;}
+">"                     {return ISGT;}
+"<="                    {return ISLTE;}
+"=>"                    {return ISGTE;}
+  /*arithmetic*/
+"+"                     {return ADDITION;}
+"-"                     {return SUBTRACTION;}
+"*"                     {return MULTIPLICATION;}
+"/"                     {return DIVISION;}
+  /*braces and parens*/
+"("                     {return OPENPAREN;}
+")"                     {return CLOSEPAREN;}
+"{"                     {return OPENBRACE;}
+"}"                     {return CLOSEBRACE;}
+  /*misc*/
+"."                     {return DOT;}
+","                     {return COMMA;}
+  /*binops*/
+"!"                     {return BANG;}
 
   /* comments and whitespace and eol stuff */
 \n                      {/* ignore eol */}
