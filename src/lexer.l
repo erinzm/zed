@@ -13,6 +13,8 @@
 
 #include <stdio.h>
 #include <math.h>
+
+#include "parser.tab.h"
 %}
 
 %%
@@ -22,8 +24,3 @@
 '(\\.|[^\'])*\'	  {printf("A string %s\n", yytext);}
 
 %%
-
-int main(void) {
-  yylex();
-  return 0;
-}
