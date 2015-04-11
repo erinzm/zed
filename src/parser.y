@@ -26,6 +26,10 @@ void yyerror(const char *s, ...);
 
 /* keywords */
 %token FN IF ELSE FOR RETURN CONST
+/* operators */
+%token SETEQ ISEQ ISNEQ ISLT ISGT ISLTE ISGTE ADDITION SUBTRACTION MULTIPLICATION DIVISION DOT COMMA BANG
+/* seperators */
+%token OPENPAREN CLOSEPAREN OPENBRACE CLOSEBRACE
 
 %token <integer> INT
 %token <floating> FLOAT
