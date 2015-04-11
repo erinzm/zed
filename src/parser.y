@@ -19,9 +19,9 @@ void yyerror(const char *s, ...);
 %}
 
 %union {
-  int ival;
-  float fval;
-  char* sval;
+  int integer;
+  float floating;
+  char* string;
 }
 
 %token <ival> INT
