@@ -33,8 +33,6 @@ compilerinaweek: $(bisonobj) $(flexobj) $(cobj)
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 
--include $(cdep) # include all C depfiles
-
 .PHONY: clean
 clean:
 	rm -f src/*.o src/*.{yy,tab}.c src/*.tab.h compilerinaweek
