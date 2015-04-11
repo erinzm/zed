@@ -6,7 +6,7 @@ and thought it would be fun to implement a **very** simple compiler.
 That's what this is.
 
 ## Building it
-Get Flex and Bison, and GCC.
+Get Flex and Bison, and GCC (or clang, but it's not a priority of mine to support it).
 Then, just run `make`.
 
 ## License:
