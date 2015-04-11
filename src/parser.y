@@ -24,6 +24,9 @@ void yyerror(const char *s, ...);
   char* string;
 }
 
+/* keywords */
+%token FN IF ELSE FOR
+
 %token <integer> INT
 %token <floating> FLOAT
 %token <string> STRING
