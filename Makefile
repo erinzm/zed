@@ -7,25 +7,24 @@ LDFLAGS+=-lm
 
 csrc = $(wildcard src/*.c)
 flexsrc = $(wildcard src/*.l)
-obj = $(csrc:.c=.o)
-dep = $(obj:.o=.d)
+cobj = $(csrc:.c=.o)
+cdep = $(cobj:.o=.d)
 
-compilerinaweek: $(obj)
+compilerinaweek: $(cobj)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
--include $(dep) # include all depfiles
 
-# generate depfiles
+# generate cdepfiles
 %.d: %.c
 	@$(CC) $(CFLAGS) $< -MM -MT $(@:.d=.o) >$@
 
 .PHONY: cleanall
-cleanall: clean cleandep
+cleanall: clean cleancdep
 
 .PHONY: clean
 clean:
-	rm -f $(obj) compilerinaweek
+	rm -f $(cobj) compilerinaweek
 
-.PHONY: cleandep
-cleandep:
-	rm -f $(dep)
+.PHONY: cleancdep
+cleancdep:
+	rm -f $(cdep)
