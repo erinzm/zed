@@ -8,6 +8,10 @@
 # IR and Depfiles
 *.d
 
+# Generated files
+*.yy.c
+*.tab.c
+
 # Precompiled Headers
 *.gch
 *.pch
@@ -32,6 +36,7 @@
 *.x86_64
 *.hex
 compilerinaweek
+lex
 
 # Debug files
 *.dSYM/
