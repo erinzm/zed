@@ -12,6 +12,10 @@
 *.yy.c
 *.tab.c
 *.tab.h
+parser.h
+parser.c
+lexer.h
+lexer.c
 
 # Precompiled Headers
 *.gch
