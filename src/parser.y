@@ -24,16 +24,16 @@ void yyerror(const char *s, ...);
   char* string;
 }
 
-%token <ival> INT
-%token <fval> FLOAT
-%token <sval> STRING
+%token <integer> INT
+%token <floating> FLOAT
+%token <string> STRING
 
 %%
 prgm:
     INT {printf("found an int\n");}
     | FLOAT {printf("found an float\n");}
     | STRING {printf("found an string\n");}
-    ;
+    | ;
 %%
 
 void yyerror(const char *s, ...) {
