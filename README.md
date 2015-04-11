@@ -1,4 +1,5 @@
 # COMPILER IN A WEEK
+[![Build Status](https://travis-ci.org/ArchimedesPi/compilerinaweek.svg?branch=master)](https://travis-ci.org/ArchimedesPi/compilerinaweek)
 
 I just started reading **"Compilers: Principles, Techniques and Tools"**,
 and thought it would be fun to implement a **very** simple compiler.
