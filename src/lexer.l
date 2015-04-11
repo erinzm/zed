@@ -25,6 +25,7 @@ void yyerror(char *s, ...);
   /* keywords */
 fn                      {return FN;}
 if                      {return IF;}
+else                    {return ELSE;}
 for                     {return FOR;}
 
   /* comments and whitespace and eol stuff */
