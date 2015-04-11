@@ -22,11 +22,17 @@ void yyerror(char *s, ...);
 
 %%
 
+  /* keywords */
+fn                      {return FN;}
+if                      {return IF;}
+for                     {return FOR;}
+
+  /* comments and whitespace and eol stuff */
 \n                      {/* ignore eol */}
 [ \t\n]                 {/* whitespace */}
 \/\/.*                  {/* comments */}
 
-   /* numbers and strings and such */
+  /* numbers and strings and such */
 [0-9]+	                {yylval.integer = atoi(yytext); return INT;}
 [0-9]+\.[0-9]*          {yyval.floating  = atof(yytext); return FLOAT;}
 [a-zA-Z_][a-z-A-Z0-9_]* {yyval.string  = strdup(yytext); return IDENTIFIER;}
@@ -35,6 +41,6 @@ false                   {yyval.integer  = 0; return BOOLEAN;}
 \"(\\.|[^\\"])*\"       {yyval.string = strdup(yytext); return STRING;}
 
    /* everything else */
-.                 {yyerror("mystery character '%c' on line '%d'", yytext, yylineno);}
+.                       {yyerror("mystery character '%c' on line '%d'", yytext, yylineno);}
 
 %%
