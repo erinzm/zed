@@ -25,7 +25,7 @@ void yyerror(const char *s, ...);
 }
 
 /* keywords */
-%token FN IF ELSE FOR
+%token FN IF ELSE FOR RETURN CONST
 
 %token <integer> INT
 %token <floating> FLOAT

@@ -27,6 +27,10 @@ fn                      {return FN;}
 if                      {return IF;}
 else                    {return ELSE;}
 for                     {return FOR;}
+return                  {return RETURN;}
+const                   {return CONST;}
+
+
 
   /* comments and whitespace and eol stuff */
 \n                      {/* ignore eol */}
