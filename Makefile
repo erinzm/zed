@@ -10,9 +10,15 @@ LDFLAGS+=-lm
 %.o: %.c
 	$(CC) -c -o $@ $<
 
-ciaw: src/main.o
+%.c %.h: %.y
+	$(BISON) --defines=$*.h --output=$@ $<
+
+%.c: %.l
+	$(FLEX) -d -o $@ $<
+
+ciaw: src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^
 
 .PHONY: clean
 clean:
-	rm -f src/*.o src/*.{yy,tab}.c src/*.tab.h compilerinaweek
+	rm -f src/*.o src/{parser,lexer}.h src/{parser,lexer}.c compilerinaweek
