@@ -1,3 +1,4 @@
+%option noyywrap
 %{
 /*************************************
  * Flex lexer for Compiler In a Week
@@ -12,3 +13,11 @@
 
 #include <stdio.h>
 %}
+
+%%
+
+/* flex token rules here */
+
+%%
+
+/* C code here */
