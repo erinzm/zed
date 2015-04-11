@@ -26,4 +26,8 @@ void yyerror(char *s, ...);
 \"(\\.|[^\\"])*\" {yylval.sval = strdup(yytext); return STRING;}
 '(\\.|[^\'])*\'	  {yylval.sval = strdup(yytext); return STRING;}
 
+   /* everything else */
+[ \t\n]           /* whitespace */
+.                 {yyerror("mystery character '%c' on line '%d'", yytext, yylineno);}
+
 %%
