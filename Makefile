@@ -13,6 +13,7 @@ cdep = $(cobj:.o=.d)
 compilerinaweek: $(cobj)
 	$(CC) -o $@ $^ $(CFLAGS) $(LDFLAGS)
 
+-include $(cdep) # include all C depfiles
 
 # generate cdepfiles
 %.d: %.c
