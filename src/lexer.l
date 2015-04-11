@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 #include "parser.tab.h"
 %}
