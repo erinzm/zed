@@ -1,4 +1,4 @@
-%option noyywrap
+%option noyywrap nodefault yylineno
 %{
 /*************************************
  * Flex lexer for Compiler In a Week
