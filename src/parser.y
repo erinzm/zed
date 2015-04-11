@@ -27,6 +27,8 @@ void yyerror(const char *s, ...);
 %token <integer> INT
 %token <floating> FLOAT
 %token <string> STRING
+%token <string> IDENTIFIER
+%token <integer> BOOLEAN
 
 %%
 prgm:

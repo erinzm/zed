@@ -27,9 +27,12 @@ void yyerror(char *s, ...);
 \/\/.*                  {/* comments */}
 
    /* numbers and strings and such */
--?[0-9]+	        {yylval.fval = atoi(yytext); return INT;}
-\"(\\.|[^\\"])*\" {yylval.sval = strdup(yytext); return STRING;}
-'(\\.|[^\'])*\'	  {yylval.sval = strdup(yytext); return STRING;}
+[0-9]+	                {yylval.integer = atoi(yytext); return INT;}
+[0-9]+\.[0-9]*          {yyval.floating  = atof(yytext); return FLOAT;}
+[a-zA-Z_][a-z-A-Z0-9_]* {yyval.string  = strdup(yytext); return IDENTIFIER;}
+true                    {yyval.integer  = 1; return BOOLEAN;}
+false                   {yyval.integer  = 0; return BOOLEAN;}
+\"(\\.|[^\\"])*\"       {yyval.string = strdup(yytext); return STRING;}
 
    /* everything else */
 .                 {yyerror("mystery character '%c' on line '%d'", yytext, yylineno);}
