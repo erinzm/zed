@@ -11,7 +11,7 @@
  * Author: Liam Marshall (2015)
  *************************************/
 
-#include "parser.tab.h"
+#include "parser.h"
 
 #include <stdio.h>
 #include <math.h>
