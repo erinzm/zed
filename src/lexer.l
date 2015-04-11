@@ -22,7 +22,8 @@ void yyerror(char *s, ...);
 
 %%
 
--?(0[xX][0-9A-Fa-f]+(\.[0-9A-Fa-f]+)?([pP]-?[0-9A-Fa-f]+)?|(([0-9]*(\.[0-9]+)?)|[0-9]+)([eE]-?[0-9]+)?)	{yylval.fval = atof(yytext); return FLOAT;}
+   /* numbers and strings and such */
+-?[0-9]+	        {yylval.fval = atoi(yytext); return INT;}
 \"(\\.|[^\\"])*\" {yylval.sval = strdup(yytext); return STRING;}
 '(\\.|[^\'])*\'	  {yylval.sval = strdup(yytext); return STRING;}
 
