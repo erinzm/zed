@@ -19,8 +19,8 @@
 
 %%
 
--?(0[xX][0-9A-Fa-f]+(\.[0-9A-Fa-f]+)?([pP]-?[0-9A-Fa-f]+)?|(([0-9]*(\.[0-9]+)?)|[0-9]+)([eE]-?[0-9]+)?)	{printf("A number %f\n", atof(yytext));}
-\"(\\.|[^\\"])*\" {printf("A string %s\n", yytext);}
-'(\\.|[^\'])*\'	  {printf("A string %s\n", yytext);}
+-?(0[xX][0-9A-Fa-f]+(\.[0-9A-Fa-f]+)?([pP]-?[0-9A-Fa-f]+)?|(([0-9]*(\.[0-9]+)?)|[0-9]+)([eE]-?[0-9]+)?)	{yyval.fval = atof(yytext); return FLOAT;}
+\"(\\.|[^\\"])*\" {yyval.sval = strdup(yytext); return STRING;}
+'(\\.|[^\'])*\'	  {yyval.sval = strdup(yytext); return STRING;}
 
 %%
