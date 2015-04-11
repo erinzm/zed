@@ -1,4 +1,4 @@
-%option noyywrap nodefault yylineno
+%option noyywrap yylineno
 %{
 /*************************************
  * Flex lexer for Compiler In a Week
@@ -22,13 +22,16 @@ void yyerror(char *s, ...);
 
 %%
 
+\n                      {/* ignore eol */}
+[ \t\n]                 {/* whitespace */}
+\/\/.*                  {/* comments */}
+
    /* numbers and strings and such */
 -?[0-9]+	        {yylval.fval = atoi(yytext); return INT;}
 \"(\\.|[^\\"])*\" {yylval.sval = strdup(yytext); return STRING;}
 '(\\.|[^\'])*\'	  {yylval.sval = strdup(yytext); return STRING;}
 
    /* everything else */
-[ \t\n]           /* whitespace */
 .                 {yyerror("mystery character '%c' on line '%d'", yytext, yylineno);}
 
 %%
