@@ -35,11 +35,11 @@ for                     {return FOR;}
 
   /* numbers and strings and such */
 [0-9]+	                {yylval.integer = atoi(yytext); return INT;}
-[0-9]+\.[0-9]*          {yyval.floating  = atof(yytext); return FLOAT;}
-[a-zA-Z_][a-z-A-Z0-9_]* {yyval.string  = strdup(yytext); return IDENTIFIER;}
-true                    {yyval.integer  = 1; return BOOLEAN;}
-false                   {yyval.integer  = 0; return BOOLEAN;}
-\"(\\.|[^\\"])*\"       {yyval.string = strdup(yytext); return STRING;}
+[0-9]+\.[0-9]*          {yylval.floating  = atof(yytext); return FLOAT;}
+[a-z][a-zA-Z0-9]*       {yylval.string  = strdup(yytext); return IDENTIFIER;}
+true                    {yylval.integer  = 1; return BOOLEAN;}
+false                   {yylval.integer  = 0; return BOOLEAN;}
+\"(\\.|[^\\"])*\"       {yylval.string = strdup(yytext); return STRING;}
 
    /* everything else */
 .                       {yyerror("mystery character '%c' on line '%d'", yytext, yylineno);}
