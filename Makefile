@@ -1,9 +1,9 @@
-CC=gcc
-FLEX=flex
-BISON=bison
+CC?=gcc
+FLEX?=flex
+BISON?=bison
 
-CFLAGS=-O2 -Wall -Wextra -Werror -Wfloat-equal -Wformat=2 -g -std=c99
-LDFLAGS=-lm
+CFLAGS+=-O2 -Wall -Wextra -Werror -Wfloat-equal -Wformat=2 -g -std=c99
+LDFLAGS+=-lm
 
 csrc = $(wildcard src/*.c)
 flexsrc = $(wildcard src/*.l)
