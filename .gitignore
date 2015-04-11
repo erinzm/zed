@@ -11,6 +11,7 @@
 # Generated files
 *.yy.c
 *.tab.c
+*.tab.h
 
 # Precompiled Headers
 *.gch
