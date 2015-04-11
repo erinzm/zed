@@ -42,7 +42,7 @@ prgm:
 %%
 
 void yyerror(const char *s, ...) {
-  extern yylineno;
+  extern int yylineno;
 
   va_list ap;
   va_start(ap, s);
