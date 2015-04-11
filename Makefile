@@ -19,6 +19,8 @@ compilerinaweek: $(obj)
 %.d: %.c
 	@$(CC) $(CFLAGS) $< -MM -MT $(@:.d=.o) >$@
 
+.PHONY: cleanall
+cleanall: clean cleandep
 
 .PHONY: clean
 clean:
