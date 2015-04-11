@@ -1,6 +1,6 @@
-CC?=gcc
-FLEX?=flex
-BISON?=bison
+CC=gcc
+FLEX=flex
+BISON=bison
 
 FLEXFLAGS+=
 BISONFLAGS+=
