@@ -10,23 +10,39 @@
  * Author: Liam Marshall (2015)
  *************************************/
 
+#include <stdlib.h>
+#include <stdarg.h>
 #include <stdio.h>
-extern int yylex();
-extern int yyparse();
-extern FILE *yyin;
+#include <string.h>
 
-void yyerror(const char *s);
+void yyerror(const char *s, ...);
 %}
 
-%token INT
-%token FLOAT
-%token STRING
+%union {
+  int ival;
+  float fval;
+  char* sval;
+}
+
+%token <ival> INT
+%token <fval> FLOAT
+%token <sval> STRING
 
 %%
-
+prgm:
+    INT {printf("found an int\n");}
+    | FLOAT {printf("found an float\n");}
+    | STRING {printf("found an string\n");}
+    ;
 %%
 
-void yyerror(const char *s) {
-  printf("Parse error: %s\n", s);
-  exit(-1);
+void yyerror(const char *s, ...) {
+  extern yylineno;
+
+  va_list ap;
+  va_start(ap, s);
+
+  fprintf(stderr, "%d: error: ", yylineno);
+  vfprintf(stderr, s, ap);
+  fprintf(stderr, "\n");
 }
