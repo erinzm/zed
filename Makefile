@@ -37,4 +37,4 @@ compilerinaweek: $(bisonobj) $(flexobj) $(cobj)
 
 .PHONY: clean
 clean:
-	rm -f src/*.o src/*.{yy,tab}.c compilerinaweek
+	rm -f src/*.o src/*.{yy,tab}.c src/*.tab.h compilerinaweek
