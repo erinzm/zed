@@ -10,10 +10,9 @@ LDFLAGS+=-lm
 csrc = $(wildcard src/*.c)
 flexsrc = $(wildcard src/*.l)
 bisonsrc = $(wildcard src/*.y)
-flexc = $(flexsrc:.l=.yy.c)
-bisonc = $(bisonsrc:.y=.tab.c)
+flexobj = $(flexsrc:.l=.yy.o)
+bisonobj = $(bisonsrc:.y=.tab.o)
 cobj = $(csrc:.c=.o)
-cdep = $(cobj:.o=.d)
 
 %.tab.c: %.y
 	$(BISON) --defines=$(@:.tab.c=.tab.h) -o $@ $< $(BISONFLAGS)
@@ -21,19 +20,21 @@ cdep = $(cobj:.o=.d)
 %.yy.c: %.l
 	$(FLEX) -o $@ $< $(FLEXFLAGS)
 
+%.yy.o: %.yy.c
+	$(CC) -c -o $@ $<
+
+%.tab.o: %.tab.c
+	$(CC) -c -o $@ $<
+
 %.obj: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-compilerinaweek: $(bisonc) $(flexc) $(cobj)
+compilerinaweek: $(bisonobj) $(flexobj) $(cobj)
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 
 -include $(cdep) # include all C depfiles
 
-# generate cdepfiles
-%.d: %.c
-	@$(CC) $(CFLAGS) $< -MM -MT $(@:.d=.o) >$@
-
 .PHONY: clean
 clean:
-	rm -f $(cobj) $(cdep) $(flexc) $(bisonc) src/*.tab.h compilerinaweek
+	rm -f src/*.o src/*.{yy,tab}.c compilerinaweek
