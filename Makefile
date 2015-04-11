@@ -17,7 +17,7 @@ LDFLAGS+=-lm
 	$(FLEX) -d -o $@ $<
 
 ciaw: src/parser.o src/lexer.o src/main.o
-	$(CC) -o $@ $^
+	$(CC) -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
 clean:
