@@ -3,7 +3,7 @@ FLEX=flex
 BISON=bison
 
 CFLAGS=-O2 -Wall -Wextra -Werror -Wfloat-equal -Wformat=2 -g -std=c99
-#LDFLAGS=
+LDFLAGS=-lm
 
 csrc = $(wildcard src/*.c)
 flexsrc = $(wildcard src/*.l)
