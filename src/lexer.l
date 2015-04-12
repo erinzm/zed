@@ -45,6 +45,7 @@ void yyerror(char *s, ...);
 "-"                     {return SUBTRACTION;}
 "*"                     {return MULTIPLICATION;}
 "/"                     {return DIVISION;}
+"%"                     {return MODULO;}
   /*braces and parens*/
 "("                     {return OPENPAREN;}
 ")"                     {return CLOSEPAREN;}
