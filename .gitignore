@@ -42,7 +42,7 @@ lexer.c
 *.hex
 compilerinaweek
 ciaw
-lex
+lextest
 
 # Debug files
 *.dSYM/

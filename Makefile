@@ -19,6 +19,9 @@ LDFLAGS+=-lm
 ciaw: src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(CFLAGS)
 
+lextest: src/parser.o src/lexer.o src/lextest.o
+	$(CC) -o $@ $^ $(CFLAGS)
+
 .PHONY: clean
 clean:
 	rm -f src/*.o src/parser.h src/{parser,lexer}.c ciaw
