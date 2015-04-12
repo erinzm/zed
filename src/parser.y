@@ -42,13 +42,58 @@ void yyerror(const char *s, ...);
 %left ISEQ ISLT ISGT ISLTE ISGTE ISNEQ
 %left ADDITION SUBTRACTION
 %left MULTIPLICATION DIVISION MODULO
+
 %start program
+
 %%
-prgm:
-    INT {printf("found an int\n");}
-    | FLOAT {printf("found an float\n");}
-    | STRING {printf("found an string\n");}
-    | ;
+
+program : statements {}
+        ;
+
+statements : statement
+           | statements statement
+           ;
+
+statement : variable_declaration
+          | function_declaration
+          | expression {}
+          ;
+
+block : OPENBRACE statements CLOSEBRACE
+      | OPENBRACE CLOSEBRACE
+      ;
+
+variable_declaration : identifier identifier {}
+                     | identifier identifier ASSIGN expression {}
+                     ;
+
+function_declaration : identifier identifier OPENPAREN function_arguments CLOSEPAREN block {}
+                     ;
+
+function_arguments : /* no arguments */ {}
+                   | variable_declaration {}
+                   | function_arguments COMMA variable_declaration {}
+                   ;
+
+identifier : IDENTIFIER {}
+           ;
+
+number : INT {}
+       | FLOAT {}
+       ;
+
+binop : ADDITION
+      | SUBTRACTION
+      | MULTIPLICATION
+      | DIVISION
+      | MODULO
+      ;
+
+expression : OPENPAREN expression CLOSEPAREN {}
+           | number {}
+           | expr binop expr {}
+           ; 
+
 %%
 
 void yyerror(const char *s, ...) {
