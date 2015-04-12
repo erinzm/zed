@@ -37,6 +37,12 @@ void yyerror(const char *s, ...);
 %token <string> IDENTIFIER
 %token <integer> BOOLEAN
 
+%right ASSIGN
+%left NOT
+%left ISEQ ISLT ISGT ISLTE ISGTE ISNEQ
+%left ADDITION SUBTRACTION
+%left MULTIPLICATION DIVISION MODULO
+%start program
 %%
 prgm:
     INT {printf("found an int\n");}
