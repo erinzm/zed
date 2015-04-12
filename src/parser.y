@@ -91,7 +91,7 @@ binop : ADDITION
 
 expression : OPENPAREN expression CLOSEPAREN {}
            | number {}
-           | expr binop expr {}
+           | expression binop expression {}
            ; 
 
 %%
