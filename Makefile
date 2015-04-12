@@ -21,4 +21,4 @@ ciaw: src/parser.o src/lexer.o src/main.o
 
 .PHONY: clean
 clean:
-	rm -f src/*.o src/parser.h src/{parser,lexer}.c compilerinaweek
+	rm -f src/*.o src/parser.h src/{parser,lexer}.c ciaw
