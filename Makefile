@@ -1,14 +1,19 @@
 CC=gcc
+CXX=g++
 FLEX=flex
 BISON=bison
 
 FLEXFLAGS+=
 BISONFLAGS+=
 CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Wfloat-equal -Wformat=2 -g -std=c99
+CXXFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Wfloat-equal -Wformat=2 -g -std=c++11
 LDFLAGS+=-lm
 
 %.o: %.c
 	$(CC) -c -o $@ $<
+
+%.o: %.cpp
+	$(CXX) -c -o $@ $<
 
 %.c %.h: %.y
 	$(BISON) --defines=$*.h --output=$@ $<
