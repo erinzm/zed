@@ -32,7 +32,7 @@ void yyerror(char *s, ...);
 
   /* assignment, arithmetic, ordering, binops, and numtests */
     /*assignment*/
-"="                     {return SETEQ;}
+"="                     {return ASSIGN;}
     /*comparison*/
 "=="                    {return ISEQ;}
 "!="                    {return ISNEQ;}
