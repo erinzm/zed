@@ -24,4 +24,4 @@ lextest: src/parser.o src/lexer.o src/lextest.o
 
 .PHONY: clean
 clean:
-	rm -f src/*.o src/parser.h src/{parser,lexer}.c ciaw
+	rm -f src/*.o src/parser.h src/{parser,lexer}.c ciaw lextest
