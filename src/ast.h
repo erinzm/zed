@@ -41,6 +41,8 @@ public:
 
 /// FunctionAST - This class represents a function definition itself.
 class FunctionAST {
+	PrototypeAST *_proto;
+	ExprAST *_body;
 public:
   FunctionAST(PrototypeAST *proto, ExprAST *body);
 };

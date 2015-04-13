@@ -17,4 +17,7 @@ CallExprAST::CallExprAST(const std::string &callee, std::vector<ExprAST*> &args)
 PrototypeAST::PrototypeAST(const std::string &name, const std::vector<std::string> &args)
 	: _name(name), _args(args) {}
 
-FunctionAST::FunctionAST(PrototypeAST *proto, ExprAST *body) {}
+FunctionAST::FunctionAST(PrototypeAST *proto, ExprAST *body) {
+	_proto = proto;
+	_body = body;
+}
