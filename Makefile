@@ -18,6 +18,9 @@ LDFLAGS+=-lm
 %.c %.h: %.y
 	$(BISON) --defines=$*.h --output=$@ $<
 
+%.cpp %.h: %.yy
+	$(BISON) --defines=$*.h --output=$@ $< #bison cpp
+
 %.c: %.l
 	$(FLEX) -d -o $@ $<
 
