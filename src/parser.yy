@@ -10,12 +10,18 @@
  * Author: Liam Marshall (2015)
  *************************************/
 
-#include <stdlib.h>
-#include <stdarg.h>
+#include <iostream>
+#include <cctype>
+#include <cstring>
 #include <stdio.h>
-#include <string.h>
+#include <stdarg.h>
+#include <stdlib.h>
+#include <vector>
+#include <stack>
 
-void yyerror(const char *s, ...);
+extern "C" void yyerror(const char *s, ...);
+extern "C" int yylex();
+
 %}
 
 %union {
