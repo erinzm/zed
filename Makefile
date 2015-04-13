@@ -4,7 +4,7 @@ FLEX=flex
 BISON=bison
 
 FLEXFLAGS+=
-BISONFLAGS+=
+BISONFLAGS+=--debug
 CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Wfloat-equal -Wformat=2 -g -std=c99
 CXXFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Wfloat-equal -Wformat=2 -g -std=c++11
 LDFLAGS+=-lm
@@ -16,13 +16,13 @@ LDFLAGS+=-lm
 	$(CXX) -c -o $@ $<
 
 %.c %.h: %.y
-	$(BISON) --defines=$*.h --output=$@ $<
+	$(BISON) $(BISONFLAGS) --defines=$*.h --output=$@ $<
 
 %.cpp %.h: %.yy
-	$(BISON) --defines=$*.h --output=$@ $< #bison cpp
+	$(BISON) $(BISONFLAGS) --defines=$*.h --output=$@ $< #bison cpp
 
 %.c: %.l
-	$(FLEX) -d -o $@ $<
+	$(FLEX) $(FLEXFLAGS) -o $@ $<
 
 ciaw: src/parser.o src/lexer.o src/ast.o src/main.o
 	$(CXX) -o $@ $^ $(CFLAGS)
