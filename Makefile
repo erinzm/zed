@@ -1,31 +1,23 @@
 CC=gcc
-CXX=g++
 FLEX=flex
 BISON=bison
 
 FLEXFLAGS+=
-BISONFLAGS+=--debug
+BISONFLAGS+=
 CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Wfloat-equal -Wformat=2 -g -std=c99
-CXXFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Wfloat-equal -Wformat=2 -g -std=c++11
 LDFLAGS+=-lm
 
 %.o: %.c
 	$(CC) -c -o $@ $<
 
-%.o: %.cpp
-	$(CXX) -c -o $@ $<
-
 %.c %.h: %.y
-	$(BISON) $(BISONFLAGS) --defines=$*.h --output=$@ $<
-
-%.cpp %.h: %.yy
-	$(BISON) $(BISONFLAGS) --defines=$*.h --output=$@ $< #bison cpp
+	$(BISON) --defines=$*.h --output=$@ $<
 
 %.c: %.l
-	$(FLEX) $(FLEXFLAGS) -o $@ $<
+	$(FLEX) -d -o $@ $<
 
-ciaw: src/parser.o src/lexer.o src/ast.o src/main.o
-	$(CXX) -o $@ $^ $(CFLAGS)
+ciaw: src/parser.o src/lexer.o src/main.o
+	$(CC) -o $@ $^ $(CFLAGS)
 
 lextest: src/parser.o src/lexer.o src/lextest.o
 	$(CC) -o $@ $^ $(CFLAGS)

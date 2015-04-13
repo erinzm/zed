@@ -10,18 +10,12 @@
  * Author: Liam Marshall (2015)
  *************************************/
 
-#include <iostream>
-#include <cctype>
-#include <cstring>
-#include <stdio.h>
-#include <stdarg.h>
 #include <stdlib.h>
-#include <vector>
-#include <stack>
+#include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
 
-extern "C" void yyerror(const char *s, ...);
-extern "C" int yylex();
-
+void yyerror(const char *s, ...);
 %}
 
 %union {
@@ -35,7 +29,7 @@ extern "C" int yylex();
 /* operators */
 %token ASSIGN ISEQ ISNEQ ISLT ISGT ISLTE ISGTE ADDITION SUBTRACTION MULTIPLICATION DIVISION DOT COMMA BANG
 /* seperators */
-%token OPENPAREN CLOSEPAREN OPENBRACE CLOSEBRACE SEMICOLON
+%token OPENPAREN CLOSEPAREN OPENBRACE CLOSEBRACE
 
 %token <integer> INT
 %token <floating> FLOAT
@@ -60,9 +54,9 @@ statements : statement
            | statements statement
            ;
 
-statement : variable_declaration SEMICOLON
-          | function_declaration SEMICOLON
-          | expression SEMICOLON
+statement : variable_declaration
+          | function_declaration
+          | expression {}
           ;
 
 block : OPENBRACE statements CLOSEBRACE
@@ -98,7 +92,6 @@ binop : ADDITION
 expression : OPENPAREN expression CLOSEPAREN {}
            | number {}
            | expression binop expression {}
-           | RETURN expression
            ; 
 
 %%

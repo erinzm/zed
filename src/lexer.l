@@ -54,8 +54,7 @@ void yyerror(char *s, ...);
   /*misc*/
 "."                     {return DOT;}
 ","                     {return COMMA;}
-";"                     {return SEMICOLON;}
-  /*binops*/                     
+  /*binops*/
 "!"                     {return BANG;}
 
   /* comments and whitespace and eol stuff */
