@@ -62,7 +62,7 @@ statements : statement
 
 statement : variable_declaration SEMICOLON
           | function_declaration SEMICOLON
-          | expression SEMICOLON;
+          | expression SEMICOLON
           ;
 
 block : OPENBRACE statements CLOSEBRACE
