@@ -21,8 +21,8 @@ LDFLAGS+=-lm
 %.c: %.l
 	$(FLEX) -d -o $@ $<
 
-ciaw: src/parser.o src/lexer.o src/main.o
-	$(CC) -o $@ $^ $(CFLAGS)
+ciaw: src/parser.o src/lexer.o src/ast.o src/main.o
+	$(CXX) -o $@ $^ $(CFLAGS)
 
 lextest: src/parser.o src/lexer.o src/lextest.o
 	$(CC) -o $@ $^ $(CFLAGS)
