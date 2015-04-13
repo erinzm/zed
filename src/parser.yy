@@ -60,9 +60,9 @@ statements : statement
            | statements statement
            ;
 
-statement : variable_declaration
-          | function_declaration
-          | expression {}
+statement : variable_declaration SEMICOLON
+          | function_declaration SEMICOLON
+          | expression SEMICOLON;
           ;
 
 block : OPENBRACE statements CLOSEBRACE
