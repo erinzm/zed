@@ -11,10 +11,10 @@ LDFLAGS+=-lm
 	$(CC) -c -o $@ $<
 
 %.c %.h: %.y
-	$(BISON) --defines=$*.h --output=$@ $<
+	$(BISON) $(BISONFLAGS) --defines=$*.h --output=$@ $<
 
 %.c: %.l
-	$(FLEX) -d -o $@ $<
+	$(FLEX) $(FLEXFLAGS) -d -o $@ $<
 
 ciaw: src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(CFLAGS)
