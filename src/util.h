@@ -3,5 +3,7 @@
 
 // free a pointer if it exists
 #define FREE_IF_EXISTS(pointer) if (pointer) free(pointer)
+#define STRUCT_INSTANCE(type) malloc(sizeof(type))
+#define STRUCT_WIDE_INSTANCE(type, width) malloc(sizeof(type) * width)
 
 #endif
