@@ -7,6 +7,8 @@ BISONFLAGS+=
 CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Wfloat-equal -Wformat=2 -g -std=c99
 LDFLAGS+=-lm
 
+TESTS=$(wildcard test/*.c)
+
 %.o: %.c
 	$(CC) -c -o $@ $<
 
@@ -21,6 +23,10 @@ ciaw: src/parser.o src/lexer.o src/main.o
 
 lextest: src/parser.o src/lexer.o src/lextest.o
 	$(CC) -o $@ $^ $(CFLAGS)
+
+.PHONY: test
+test: $(TESTS)
+	@sh tests/runtests.sh
 
 .PHONY: clean
 clean:
