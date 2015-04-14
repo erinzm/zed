@@ -27,6 +27,10 @@ void yyerror(const char *s, ...);
   float floating;
   char* string;
   ast_node *node;
+  struct {
+    kal_ast_node **args;
+    int count;
+  } fncall_args;
 }
 
 /* keywords */
