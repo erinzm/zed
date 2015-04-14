@@ -24,7 +24,7 @@ typedef enum ast_type_binop {
 } ast_binop;
 
 typedef struct ast_number {
-	double number;
+	double value;
 } ast_number;
 
 typedef struct ast_variable {
