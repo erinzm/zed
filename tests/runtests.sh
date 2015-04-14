@@ -1,9 +1,12 @@
 echo
 echo "Running unit tests"
-for test in test/*_test do
-	if [[ -f $test ]] then
+for test in test/*_test
+do
+	if [[ -f $test ]]
+		then
 		./$test 2>&1 /tmp/test.log
-		if [[$? -eq 0]] then
+		if [[$? -eq 0]]
+		then
 			rm -f /tmp/test.log
 		else
 			cat /tmp/test.log
