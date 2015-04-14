@@ -15,6 +15,10 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "ast.h"
+
+ast_node *root;
+
 void yyerror(const char *s, ...);
 %}
 
@@ -22,6 +26,7 @@ void yyerror(const char *s, ...);
   int integer;
   float floating;
   char* string;
+  ast_node *node;
 }
 
 /* keywords */
