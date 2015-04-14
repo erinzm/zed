@@ -1,5 +1,30 @@
 #include "ast.h"
 #include "util.h"
+#include <stdlib.h>
+#include <string.h>
+
+ast_node *ast_number_create(double value) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	node->type = AST_TYPE_NUMBER;
+	node->number.value = value;
+	return node;
+}
+
+ast_node *ast_variable_create(char *name) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	node->type = AST_TYPE_VARIABLE;
+	node->variable.name = strdup(name);
+	return node;
+}
+
+ast_node *ast_binary_op_create(ast_binop op, ast_node *lhs, ast_node *rhs) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	node->type = AST_TYPE_BINARY_OP;
+	node->binary_op.op = op;
+	node->binary_op.lhs = lhs;
+	node->binary_op.rhs = rhs;
+	return node;
+}
 
 void ast_node_free(ast_node *node) {
 	if (!node) return; // don't try to free nodes that don't exist
