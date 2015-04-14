@@ -11,7 +11,7 @@
 typedef enum ast_node_type {
 	AST_TYPE_NUMBER,
 	AST_TYPE_VARIABLE,
-	AST_TYPE_BINOP,
+	AST_TYPE_BINARY_OP,
 	AST_TYPE_FNCALL
 } ast_node_type;
 
