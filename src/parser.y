@@ -87,8 +87,8 @@ function_arguments : /* no arguments */ {}
 identifier : IDENTIFIER {}
            ;
 
-number : INT {}
-       | FLOAT {}
+number : INT { $$ = ast_number_create($1); }
+       | FLOAT { $$ = ast_number_create($1); }
        ;
 
 binop : ADDITION
