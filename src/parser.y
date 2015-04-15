@@ -91,15 +91,15 @@ number : INT { $$ = ast_number_create($1); }
        | FLOAT { $$ = ast_number_create($1); }
        ;
 
-binop : ADDITION
-      | SUBTRACTION
-      | MULTIPLICATION
-      | DIVISION
-      | MODULO
+binop : ADDITION { $$ = AST_BINOP_ADD; }
+      | SUBTRACTION { $$ = AST_BINOP_SUB; }
+      | MULTIPLICATION { $$ = AST_BINOP_MUL; }
+      | DIVISION { $$ = AST_BINOP_DIV; }
+      | MODULO { $$ = AST_BINOP_MOD; }
       ;
 
 expression : OPENPAREN expression CLOSEPAREN {}
-           | number {}
+           | number 
            | expression binop expression {}
            | identifier
            ; 
