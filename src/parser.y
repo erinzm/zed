@@ -26,9 +26,9 @@ void yyerror(const char *s, ...);
   int integer;
   float floating;
   char* string;
-  ast_node *node;
+  struct ast_node *node;
   struct {
-    kal_ast_node **args;
+    struct ast_node **args;
     int count;
   } fncall_args;
 }
