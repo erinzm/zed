@@ -21,7 +21,7 @@ typedef enum ast_type_binop {
 	AST_BINOP_MUL,
 	AST_BINOP_DIV,
 	AST_BINOP_MOD
-} ast_binop;
+} ast_type_binop;
 
 typedef struct ast_number {
 	double value;
@@ -35,7 +35,7 @@ typedef struct ast_binary_op {
 	ast_type_binop op;
 	struct ast_node *lhs;
 	struct ast_node *rhs;
-} ast_binop;
+} ast_binary_op;
 
 typedef struct ast_fncall {
 	char *name;
@@ -50,7 +50,7 @@ typedef struct ast_node {
 		ast_variable variable;
 		ast_binary_op binary_op;
 		ast_fncall fncall;
-	}
+	};
 } ast_node;
 
 // =================< AST functions >================= //
@@ -59,7 +59,7 @@ ast_node *ast_number_create(double value);
 
 ast_node *ast_variable_create(char *name);
 
-ast_node *ast_binary_op_create(ast_binop op,
+ast_node *ast_binary_op_create(ast_type_binop op,
     ast_node *lhs, ast_node *rhs);
 
 ast_node *ast_fncall_create(char *name, ast_node **args,

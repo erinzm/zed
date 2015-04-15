@@ -17,7 +17,7 @@ ast_node *ast_variable_create(char *name) {
 	return node;
 }
 
-ast_node *ast_binary_op_create(ast_binop op, ast_node *lhs, ast_node *rhs) {
+ast_node *ast_binary_op_create(ast_type_binop op, ast_node *lhs, ast_node *rhs) {
 	ast_node *node = STRUCT_INSTANCE(ast_node);
 	node->type = AST_TYPE_BINARY_OP;
 	node->binary_op.op = op;
