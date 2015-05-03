@@ -1,6 +1,7 @@
 #include "ast.h"
 #include "util.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 ast_node *ast_number_create(double value) {
@@ -31,7 +32,7 @@ void dump_ast_node(ast_node *node) {
 	switch(node->type) {
 		case AST_TYPE_NUMBER:
 			printf("node->type == AST_TYPE_NUMBER\n");
-			INSPECT(node->number.value, "%d");
+			INSPECT(node->number.value, "%f");
 			break;
 		case AST_TYPE_VARIABLE:
 			printf("node->type == AST_TYPE_VARIABLE");
