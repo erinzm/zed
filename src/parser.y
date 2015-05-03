@@ -19,7 +19,13 @@
 ast_node *root;
 
 void yyerror(const char *s, ...);
+int yylex();
+
 %}
+
+%code requires {
+  #include "ast.h"
+}
 
 
 %union {
