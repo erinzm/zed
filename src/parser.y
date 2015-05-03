@@ -37,12 +37,13 @@ void yyerror(const char *s, ...);
 /* keywords */
 %token FN IF ELSE FOR RETURN CONST
 /* operators */
-%token ASSIGN ISEQ ISNEQ ISLT ISGT ISLTE ISGTE ADDITION SUBTRACTION MULTIPLICATION DIVISION DOT COMMA BANG
+%token ASSIGN DOT COMMA BANG
+%token <token> ISEQ ISNEQ ISLT ISGT ISLTE ISGTE ADDITION SUBTRACTION MULTIPLICATION DIVISION
 /* seperators */
 %token OPENPAREN CLOSEPAREN OPENBRACE CLOSEBRACE
 
-%token <integer> INT
-%token <floating> FLOAT
+%token <number> INT
+%token <number> FLOAT
 %token <string> STRING
 %token <string> IDENTIFIER
 %token <integer> BOOLEAN
@@ -52,6 +53,9 @@ void yyerror(const char *s, ...);
 %left ISEQ ISLT ISGT ISLTE ISGTE ISNEQ
 %left ADDITION SUBTRACTION
 %left MULTIPLICATION DIVISION MODULO
+
+%type <node> expression identifier number variable_declaration function_declaration statement
+%type <token> binop
 
 %start program
 
