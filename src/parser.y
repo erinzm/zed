@@ -22,15 +22,16 @@ ast_node *root;
 void yyerror(const char *s, ...);
 %}
 
+
 %union {
-  int integer;
-  float floating;
+  double number;
   char* string;
-  struct ast_node *node;
+  ast_node *node;
   struct {
-    struct ast_node **args;
+    ast_node **args;
     int count;
   } fncall_args;
+  int token;
 }
 
 /* keywords */
