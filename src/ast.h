@@ -65,6 +65,8 @@ ast_node *ast_binary_op_create(ast_type_binop op,
 ast_node *ast_fncall_create(char *name, ast_node **args,
     int argc);
 
+void dump_ast_node(ast_node *node);
+
 void ast_node_free(ast_node *node);
 
 #endif

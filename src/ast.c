@@ -26,6 +26,27 @@ ast_node *ast_binary_op_create(ast_type_binop op, ast_node *lhs, ast_node *rhs) 
 	return node;
 }
 
+void dump_ast_node(ast_node *node) {
+	printf("=== node dump ===");
+	switch(node->type) {
+		case AST_TYPE_NUMBER:
+			printf("node->type == AST_TYPE_NUMBER\n");
+			INSPECT(node->number.value, "%d");
+			break;
+		case AST_TYPE_VARIABLE:
+			printf("node->type == AST_TYPE_VARIABLE");
+			INSPECT(node->variable.name, "%s");
+			break;
+		case AST_TYPE_BINARY_OP:
+			printf("node->type == AST_TYPE_BINARY_OP");
+			INSPECT(node->binary_op.op, "%i");
+			dump_ast_node(node->binary_op.lhs);
+			dump_ast_node(node->binary_op.rhs);
+			break;
+	}
+	printf("=== end node dump ===");
+}
+
 void ast_node_free(ast_node *node) {
 	if (!node) return; // don't try to free nodes that don't exist
 
