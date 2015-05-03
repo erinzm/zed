@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 ast_node *root;
 
 void yyerror(const char *s, ...);
