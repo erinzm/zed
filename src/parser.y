@@ -98,10 +98,10 @@ binop : ADDITION { $$ = AST_BINOP_ADD; }
       | MODULO { $$ = AST_BINOP; }
       ;
 
-expression : OPENPAREN expression CLOSEPAREN {}
-           | number 
-           | expression binop expression {}
-           | identifier
+expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
+           | number
+           | expression binop expression { $$ = ast_binary_op_create($2, $1, $3); }
+           | identifier { $$ = ast_variable_create($1); }
            ; 
 
 %%
