@@ -84,7 +84,7 @@ function_arguments : /* no arguments */ {}
                    | function_arguments COMMA variable_declaration {}
                    ;
 
-identifier : IDENTIFIER {}
+identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); }
            ;
 
 number : INT { $$ = ast_number_create($1); }
