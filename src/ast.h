@@ -39,7 +39,7 @@ typedef struct ast_binary_op {
 
 typedef struct ast_fncall {
 	char *name;
-	char **args;
+	struct ast_node **args;
 	unsigned int argc;
 } ast_fncall;
 
