@@ -63,10 +63,10 @@ void yyerror(char *s, ...);
 \/\/.*                  {/* comments */}
 
   /* numbers and strings and such */
-[0-9]+	                {yylval.integer = atoi(yytext); return INT;}
-[0-9]+\.[0-9]*          {yylval.floating  = atof(yytext); return FLOAT;}
-true                    {yylval.integer  = 1; return BOOLEAN;}
-false                   {yylval.integer  = 0; return BOOLEAN;}
+[0-9]+	                {yylval.number = atof(yytext); return INT;}
+[0-9]+\.[0-9]*          {yylval.number  = atof(yytext); return FLOAT;}
+true                    {yylval.number  = 1; return BOOLEAN;}
+false                   {yylval.number  = 0; return BOOLEAN;}
 [a-z][a-zA-Z0-9]*       {yylval.string  = strdup(yytext); return IDENTIFIER;}
 \"(\\.|[^\\"])*\"       {yylval.string = strdup(yytext); return STRING;}
 
