@@ -5,6 +5,6 @@
 #define FREE_IF_EXISTS(pointer) if (pointer) free(pointer)
 #define STRUCT_INSTANCE(type) malloc(sizeof(type))
 #define STRUCT_WIDE_INSTANCE(type, width) malloc(sizeof(type) * width)
-#define INSPECT(thing, fmt) printf(#thing " == " fmt, thing)
+#define INSPECT(thing, fmt) printf(#thing " == " fmt "\n", thing)
 
 #endif
