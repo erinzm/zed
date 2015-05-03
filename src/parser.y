@@ -64,7 +64,7 @@ void yyerror(const char *s, ...);
 program : statements {}
         ;
 
-statements : statement
+statements : statement { dump_ast_node($1); }
            | statements statement
            ;
 
@@ -106,7 +106,7 @@ binop : ADDITION { $$ = AST_BINOP_ADD; }
 expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
            | number
            | expression binop expression { $$ = ast_binary_op_create($2, $1, $3); }
-           | identifier { $$ = ast_variable_create($1); }
+           | identifier
            ; 
 
 %%
