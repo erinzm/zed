@@ -16,7 +16,7 @@ TESTS=$(wildcard test/*.c)
 	$(BISON) $(BISONFLAGS) --defines=$*.h --output=$@ $<
 
 %.c: %.l
-	$(FLEX) $(FLEXFLAGS) -d -o $@ $<
+	$(FLEX) $(FLEXFLAGS) -o $@ $<
 
 ciaw: src/ast.o src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
