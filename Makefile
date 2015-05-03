@@ -10,7 +10,7 @@ LDFLAGS+=-lm
 TESTS=$(wildcard test/*.c)
 
 %.o: %.c
-	$(CC) -c -o $@ $<
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 %.c %.h: %.y
 	$(BISON) $(BISONFLAGS) --defines=$*.h --output=$@ $<
@@ -18,8 +18,8 @@ TESTS=$(wildcard test/*.c)
 %.c: %.l
 	$(FLEX) $(FLEXFLAGS) -d -o $@ $<
 
-ciaw: src/parser.o src/lexer.o src/main.o
-	$(CC) -o $@ $^ $(CFLAGS)
+ciaw: src/ast.o src/parser.o src/lexer.o src/main.o
+	$(CC) -o $@ $^ $(LDFLAGS)
 
 lextest: src/parser.o src/lexer.o src/lextest.o
 	$(CC) -o $@ $^ $(CFLAGS)
