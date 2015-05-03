@@ -10,12 +10,12 @@
  * Author: Liam Marshall (2015)
  *************************************/
 
+#include "ast.h"
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
 
-#include "ast.h"
 
 ast_node *root;
 
