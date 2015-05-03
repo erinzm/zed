@@ -1,4 +1,4 @@
-%option noyywrap yylineno
+%option noyywrap yylineno nounput
 %{
 /*************************************
  * Flex lexer for Compiler In a Week
@@ -11,6 +11,7 @@
  * Author: Liam Marshall (2015)
  *************************************/
 
+#include "ast.h"
 #include "parser.h"
 
 #include <stdio.h>
