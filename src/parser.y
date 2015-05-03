@@ -63,7 +63,7 @@ void yyerror(const char *s, ...);
 program : statements {}
         ;
 
-statements : statement { dump_ast_node($1); }
+statements : statement
            | statements statement
            ;
 
@@ -88,7 +88,7 @@ function_arguments : /* no arguments */ {}
                    | function_arguments COMMA variable_declaration {}
                    ;
 
-identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); }
+identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); dump_ast_node($$); }
            ;
 
 number : INT { $$ = ast_number_create($1); }
@@ -104,7 +104,7 @@ binop : ADDITION { $$ = AST_BINOP_ADD; }
 
 expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
            | number
-           | expression binop expression { $$ = ast_binary_op_create($2, $1, $3); }
+           | expression binop expression { $$ = ast_binary_op_create($2, $1, $3); dump_ast_node($$); }
            | identifier
            ; 
 
