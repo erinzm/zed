@@ -95,7 +95,7 @@ binop : ADDITION { $$ = AST_BINOP_ADD; }
       | SUBTRACTION { $$ = AST_BINOP_SUB; }
       | MULTIPLICATION { $$ = AST_BINOP_MUL; }
       | DIVISION { $$ = AST_BINOP_DIV; }
-      | MODULO { $$ = AST_BINOP; }
+      | MODULO { $$ = AST_BINOP_MOD; }
       ;
 
 expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
