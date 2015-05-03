@@ -65,7 +65,7 @@ statements : statement
 
 statement : variable_declaration
           | function_declaration
-          | expression {}
+          | expression
           ;
 
 block : OPENBRACE statements CLOSEBRACE
