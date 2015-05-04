@@ -75,6 +75,7 @@ statements : statement
 
 statement : variable_declaration
           | function_declaration
+          | variable_assignment
           | expression
           ;
 
@@ -85,6 +86,8 @@ block : OPENBRACE statements CLOSEBRACE
 variable_declaration : identifier identifier {}
                      | identifier identifier ASSIGN expression {}
                      ;
+
+variable_assignment : identifier ASSIGN expression {}
 
 function_declaration : identifier identifier OPENPAREN function_arguments CLOSEPAREN block {}
                      ;
