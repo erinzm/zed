@@ -11,6 +11,8 @@ static char doc[] =
   "Compiler In A Week - @archimedespi's personal project to learn about compilers";
 static struct argp argp = {0, 0, 0, doc, 0, 0, 0};
 
+extern int yyparse();
+
 int main(int argc, char** argv) {
   argp_parse(&argp, argc, argv, argp_flags, 0, 0);
   yyparse();
