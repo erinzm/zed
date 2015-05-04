@@ -94,7 +94,7 @@ function_arguments : /* no arguments */ {}
                    | function_arguments COMMA variable_declaration {}
                    ;
 
-identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); dump_ast_node($$); }
+identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); }
            ;
 
 number : INT { $$ = ast_number_create($1); }
@@ -108,7 +108,7 @@ binop : ADDITION { $$ = AST_BINOP_ADD; }
       | MODULO { $$ = AST_BINOP_MOD; }
       ;
 
-expression : OPENPAREN expression CLOSEPAREN { $$ = $2; dump_ast_node($$); }
+expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
            | number
            | expression binop expression { $$ = ast_binary_op_create($2, $1, $3);}
            | identifier
