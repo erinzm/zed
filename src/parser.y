@@ -123,6 +123,9 @@ void yyerror(const char *s, ...) {
   va_start(ap, s);
 
   fprintf(stderr, "%d: error: ", yylineno);
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wformat-nonliteral"
   vfprintf(stderr, s, ap);
+  #pragma GCC diagnostic pop
   fprintf(stderr, "\n");
 }
