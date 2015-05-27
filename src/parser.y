@@ -76,8 +76,9 @@ statements : statement {printf("That was a statement\n");}
 
 statement : variable_declaration EOS
           | function_declaration EOS
-          | variable_assignment EOS
-          | expression EOS
+          | function_call        EOS
+          | variable_assignment  EOS
+          | expression           EOS
           ;
 
 block : OPENBRACE statements CLOSEBRACE {printf("That was a block\n");}
@@ -90,9 +91,11 @@ variable_declaration : identifier identifier {}
 
 variable_assignment : identifier ASSIGN expression {}
 
-function_declaration : identifier identifier OPENPAREN function_arguments CLOSEPAREN block {}
+function_declaration : identifier identifier OPENPAREN function_decl_arguments CLOSEPAREN block {}
                      ;
 
+function_call : identifier OPENPAREN function_call_arguments CLOSEPAREN
+              ;
 
 function_decl_arguments : /* no arguments */ {}
                    | variable_declaration {}
