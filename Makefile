@@ -2,13 +2,10 @@ CC=gcc
 FLEX=flex
 BISON=bison
 
-LLVM_CFLAGS=`llvm-config --cflags`
-LLVM_LDFLAGS=`llvm-config --ldflags --libs`
-
 FLEXFLAGS+=
 BISONFLAGS+=
-CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Winit-self -Wfloat-equal -Wformat=2 -Wno-unused-function -g -std=gnu11 $(LLVM_CFLAGS)
-LDFLAGS+=-lm $(LLVM_LDFLAGS)
+CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Winit-self -Wfloat-equal -Wformat=2 -Wno-unused-function -g -std=gnu11
+LDFLAGS+=-lm
 
 TESTS=$(wildcard test/*.c)
 
