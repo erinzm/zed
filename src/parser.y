@@ -148,4 +148,5 @@ void yyerror(const char *s, ...) {
   vfprintf(stderr, s, ap);
   #pragma GCC diagnostic pop
   fprintf(stderr, "\n");
+  exit(1);
 }
