@@ -30,6 +30,7 @@ void yyerror(char *s, ...);
 "for"                     {return FOR;}
 "return"                  {return RETURN;}
 "const"                   {return CONST;}
+"use"                     {return USE;}
 
   /* assignment, arithmetic, ordering, binops, and numtests */
     /*assignment*/
