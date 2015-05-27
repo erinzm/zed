@@ -66,11 +66,12 @@ int yylex();
 
 %%
 
-program : statements {}
+program : block
+        | statements
         ;
 
-statements : statement
-           | statements statement
+statements : statement {printf("That was a statement\n");}
+           | statements statement {printf("That was a statements\n");}
            ;
 
 statement : variable_declaration EOS
@@ -79,8 +80,8 @@ statement : variable_declaration EOS
           | expression EOS
           ;
 
-block : OPENBRACE statements CLOSEBRACE
-      | OPENBRACE CLOSEBRACE
+block : OPENBRACE statements CLOSEBRACE {printf("That was a block\n");}
+      | OPENBRACE CLOSEBRACE {printf("That was an empty block\n");}
       ;
 
 variable_declaration : identifier identifier {}
