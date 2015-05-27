@@ -5,7 +5,7 @@
 use <stdio>;
 
 # Hey cool, a function!
-fn main() {
+fn void main() {
   # Let's call a system function!
   printf("Hello World!\n"); # Yay cool, hello world!
 }
