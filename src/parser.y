@@ -89,7 +89,7 @@ variable_declaration : identifier identifier {}
 
 variable_assignment : identifier ASSIGN expression {}
 
-function_declaration : identifier identifier OPENPAREN function_decl_arguments CLOSEPAREN block {}
+function_declaration : FN identifier identifier OPENPAREN function_decl_arguments CLOSEPAREN block {}
                      ;
 
 function_call : identifier OPENPAREN function_call_arguments CLOSEPAREN
