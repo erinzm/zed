@@ -36,12 +36,12 @@ void yyerror(char *s, ...);
     /*assignment*/
 "="                     {return ASSIGN;}
     /*comparison*/
-"=="                    {return ISEQ;}
-"!="                    {return ISNEQ;}
-"<"                     {return ISLT;}
-">"                     {return ISGT;}
-"<="                    {return ISLTE;}
-"=>"                    {return ISGTE;}
+"=="                    {return EQ;}
+"!="                    {return NEQ;}
+"<"                     {return LT;}
+">"                     {return GT;}
+"<="                    {return LTE;}
+"=>"                    {return GTE;}
   /*arithmetic*/
 "+"                     {return ADDITION;}
 "-"                     {return SUBTRACTION;}
