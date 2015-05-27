@@ -1,0 +1,10 @@
+use <stdio>;
+use foo;
+use it_;
+use <it_>;
+use _it;
+use <_it>;
+use do_it;
+use <do_it>;
+use f00b4r;
+use <f00b4r>;
