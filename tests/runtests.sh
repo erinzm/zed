@@ -3,14 +3,12 @@
 echo "Running unit tests"
 for test in tests/*_test*
 do
-	echo "potentially running $test"
 	if [ -f $test ]
 		then
 		./$test > /tmp/test.log 2>&1
 		if [ $? -eq 0 ]
 		then
 			echo "$(tput setaf 2)$test passed $(tput bold)(✓)$(tput sgr0)"
-			cat /tmp/test.log
 			rm -f /tmp/test.log
 		else
 			echo "$(tput setaf 1)$test failed $(tput bold)(✗)$(tput sgr0)"
