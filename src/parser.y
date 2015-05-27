@@ -73,10 +73,10 @@ statements : statement
            | statements statement
            ;
 
-statement : variable_declaration
-          | function_declaration
-          | variable_assignment
-          | expression
+statement : variable_declaration EOS
+          | function_declaration EOS
+          | variable_assignment EOS
+          | expression EOS
           ;
 
 block : OPENBRACE statements CLOSEBRACE
@@ -115,7 +115,7 @@ expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
            | number
            | expression binop expression { $$ = ast_binary_op_create($2, $1, $3);}
            | identifier
-           ; 
+           ;
 
 %%
 

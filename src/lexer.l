@@ -55,6 +55,7 @@ void yyerror(char *s, ...);
   /*misc*/
 "."                     {return DOT;}
 ","                     {return COMMA;}
+";"                     {return EOS;}
   /*binops*/
 "!"                     {return BANG;}
 
