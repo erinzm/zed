@@ -8,4 +8,4 @@ use <stdio>;
 fn void main() {
   # Let's call a system function!
   printf("Hello World!\n"); # Yay cool, hello world!
-}
+};
