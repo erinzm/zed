@@ -10,3 +10,4 @@ before_install:
   - if [ "$CC" = "gcc" ]; then export CC="gcc-4.9" CC="gcc-4.9"; fi
 script:
   - make CC=$CC
+  - make test
