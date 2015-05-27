@@ -117,6 +117,9 @@ number : INT { $$ = ast_number_create($1); }
        | FLOAT { $$ = ast_number_create($1); }
        ;
 
+string : STRING { }
+       ;
+
 binop : ADDITION { $$ = AST_BINOP_ADD; }
       | SUBTRACTION { $$ = AST_BINOP_SUB; }
       | MULTIPLICATION { $$ = AST_BINOP_MUL; }
@@ -126,6 +129,7 @@ binop : ADDITION { $$ = AST_BINOP_ADD; }
 
 expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
            | number
+           | string
            | expression binop expression { $$ = ast_binary_op_create($2, $1, $3);}
            | identifier
            ;
