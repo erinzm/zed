@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "Running unit tests"
+echo "$(tput setaf 3)Running unit tests$(tput sgr0)"
 for test in tests/*_test*
 do
 	if [ -f $test ]
