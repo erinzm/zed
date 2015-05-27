@@ -77,6 +77,7 @@ statement : variable_declaration EOS
           | function_call        EOS
           | variable_assignment  EOS
           | expression           EOS
+          | use                  EOS
           ;
 
 block : OPENBRACE statements CLOSEBRACE {printf("That was a block\n");}
@@ -104,6 +105,10 @@ function_call_arguments : /* no arguments */ {}
                         | expression {}
                         | function_call_arguments COMMA expression {}
                         ;
+
+use : USE IDENTIFIER
+    | USE LT IDENTIFIER GT
+    ;
 
 identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); }
            ;
