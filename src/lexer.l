@@ -62,7 +62,7 @@ void yyerror(char *s, ...);
   /* comments and whitespace and eol stuff */
 \n                      {/* ignore eol */}
 [ \t\n]                 {/* whitespace */}
-\/\/.*                  {/* comments */}
+#.*                     {/* comments */}
 
   /* numbers and strings and such */
 [0-9]+	                {yylval.number = atof(yytext); return INT;}
