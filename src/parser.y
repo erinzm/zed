@@ -66,9 +66,7 @@ int yylex();
 
 %%
 
-program : block
-        | statements
-        ;
+program : statements;
 
 statements : statement {printf("That was a statement\n");}
            | statements statement {printf("That was a statements\n");}
