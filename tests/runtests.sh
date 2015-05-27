@@ -1,15 +1,20 @@
+#!/bin/bash
+
 echo "Running unit tests"
-for test in test/*_test
+for test in tests/*_test*
 do
-	if [[ -f $test ]]
+	echo "potentially running $test"
+	if [ -f $test ]
 		then
-		./$test 2>&1 /tmp/test.log
-		if [[$? -eq 0]]
+		./$test > /tmp/test.log 2>&1
+		if [ $? -eq 0 ]
 		then
 			echo "$(tput setaf 2)$test passed $(tput bold)(✓)$(tput sgr0)"
+			cat /tmp/test.log
 			rm -f /tmp/test.log
 		else
 			echo "$(tput setaf 1)$test failed $(tput bold)(✗)$(tput sgr0)"
+			echo "$(tput setaf 1)$test's output (stdout+stderror):$(tput sgr0)"
 			cat /tmp/test.log
 			rm -f /tmp/test.log
 			exit 1
