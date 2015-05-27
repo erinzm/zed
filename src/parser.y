@@ -93,10 +93,16 @@ variable_assignment : identifier ASSIGN expression {}
 function_declaration : identifier identifier OPENPAREN function_arguments CLOSEPAREN block {}
                      ;
 
-function_arguments : /* no arguments */ {}
+
+function_decl_arguments : /* no arguments */ {}
                    | variable_declaration {}
-                   | function_arguments COMMA variable_declaration {}
+                   | function_decl_arguments COMMA variable_declaration {}
                    ;
+
+function_call_arguments : /* no arguments */ {}
+                        | expression {}
+                        | function_call_arguments COMMA expression {}
+                        ;
 
 identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); }
            ;
