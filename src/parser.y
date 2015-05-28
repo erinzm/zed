@@ -59,7 +59,7 @@ int yylex();
 %left ADDITION SUBTRACTION
 %left MULTIPLICATION DIVISION MODULO
 
-%type <node> expression identifier number variable_declaration function_declaration statement
+%type <node> expression identifier number variable_declaration function_declaration statement string
 %type <token> binop
 
 %start program
