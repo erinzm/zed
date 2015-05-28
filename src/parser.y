@@ -117,7 +117,7 @@ number : INT { $$ = ast_number_create($1); }
        | FLOAT { $$ = ast_number_create($1); }
        ;
 
-string : STRING { }
+string : STRING { $$ = ast_string_create($1); free($1); }
        ;
 
 binop : ADDITION { $$ = AST_BINOP_ADD; }
