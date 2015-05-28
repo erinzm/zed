@@ -13,6 +13,13 @@ ast_node *ast_number_create(double value) {
 	return node;
 }
 
+ast_node *ast_string_create(char *value) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	node->type = AST_TYPE_STRING;
+	node->string.value = strdup(value);
+	return node;
+}
+
 ast_node *ast_variable_create(char *name) {
 	ast_node *node = STRUCT_INSTANCE(ast_node);
 	node->type = AST_TYPE_VARIABLE;

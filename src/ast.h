@@ -1,7 +1,7 @@
 /*
  * ast.h
  * an ast for COMPILER IN A WEEK
- * 
+ *
  * GPLv3 Liam Marshall 2015
  */
 
@@ -10,6 +10,7 @@
 
 typedef enum ast_node_type {
 	AST_TYPE_NUMBER,
+	AST_TYPE_STRING,
 	AST_TYPE_VARIABLE,
 	AST_TYPE_BINARY_OP,
 	AST_TYPE_FNCALL
@@ -26,6 +27,10 @@ typedef enum ast_type_binop {
 typedef struct ast_number {
 	double value;
 } ast_number;
+
+typedef struct ast_string {
+	char *value;
+} ast_string;
 
 typedef struct ast_variable {
 	char *name;
@@ -47,6 +52,7 @@ typedef struct ast_node {
 	ast_node_type type;
 	union {
 		ast_number number;
+		ast_string string;
 		ast_variable variable;
 		ast_binary_op binary_op;
 		ast_fncall fncall;
@@ -56,6 +62,8 @@ typedef struct ast_node {
 // =================< AST functions >================= //
 
 ast_node *ast_number_create(double value);
+
+ast_node *ast_string_create(char *value)
 
 ast_node *ast_variable_create(char *name);
 
