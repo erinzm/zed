@@ -21,9 +21,6 @@ TESTS=$(wildcard test/*.c)
 ciaw: src/ast.o src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-lextest: src/parser.o src/lexer.o src/lextest.o
-	$(CC) -o $@ $^ $(CFLAGS)
-
 .PHONY: test
 test: $(TESTS)
 	@sh tests/runtests.sh
