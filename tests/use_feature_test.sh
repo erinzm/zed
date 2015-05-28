@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e # Error on fail
 
-cat tests/testdata/use.cw | ./ciaw
+cat tests/testdata/use.ciaw | ./ciaw
