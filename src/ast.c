@@ -43,6 +43,10 @@ void dump_ast_node(ast_node *node) {
 			printf("node->type == AST_TYPE_NUMBER\n");
 			INSPECT(node->number.value, "%f");
 			break;
+		case AST_TYPE_STRING:
+			printf("node->type == AST_TYPE_STRING\n");
+			INSPECT(node->string.value, "%s");
+			break;
 		case AST_TYPE_VARIABLE:
 			printf("node->type == AST_TYPE_VARIABLE\n");
 			INSPECT(node->variable.name, "%s");
@@ -66,6 +70,10 @@ void ast_node_free(ast_node *node) {
 	switch (node->type) {
 		case AST_TYPE_NUMBER: break; // Numbers are a *non-pointer* double,
 		// they don't need to be *explicitly* freed if the struct is being freed after this
+		case AST_TYPE_STRING: {
+			FREE_IF_EXISTS(node->string.value);
+			break;
+		}
 		case AST_TYPE_VARIABLE: {
 			FREE_IF_EXISTS(node->variable.name);
 			break;
