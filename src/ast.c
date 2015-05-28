@@ -1,8 +1,3 @@
-#include <stdlib.h>
-#include <string.h>
-#include <stdio.h>
-#include "util.h"
-
 #include "ast.h"
 
 
@@ -36,6 +31,14 @@ ast_node *ast_binary_op_create(ast_type_binop op, ast_node *lhs, ast_node *rhs) 
 	return node;
 }
 
+ast_node *ast_use_create(char *value, bool isC) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	node->type = AST_TYPE_USE;
+	node->use.value = strdup(value);
+	node->use.isC = isC;
+	return node;
+}
+
 void dump_ast_node(ast_node *node) {
 	printf("=== node dump ===\n");
 	switch(node->type) {
@@ -50,6 +53,11 @@ void dump_ast_node(ast_node *node) {
 		case AST_TYPE_VARIABLE:
 			printf("node->type == AST_TYPE_VARIABLE\n");
 			INSPECT(node->variable.name, "%s");
+			break;
+		case AST_TYPE_USE:
+			printf("node->type == AST_TYPE_USE\n");
+			INSPECT(node->use.value, "%s");
+			INSPECT(node->use.isC, "%i");
 			break;
 		case AST_TYPE_BINARY_OP:
 			printf("node->type == AST_TYPE_BINARY_OP\n");
@@ -82,6 +90,9 @@ void ast_node_free(ast_node *node) {
 			FREE_IF_EXISTS(node->binary_op.lhs);
 			FREE_IF_EXISTS(node->binary_op.rhs);
 			break;
+		}
+		case AST_TYPE_USE: {
+			FREE_IF_EXISTS(node->use.value);
 		}
 		case AST_TYPE_FNCALL: {
 			FREE_IF_EXISTS(node->fncall.name);
