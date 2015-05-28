@@ -9,6 +9,8 @@ LDFLAGS+=-lm
 
 TESTS=$(wildcard test/*.c)
 
+all: clean ciaw test
+
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
