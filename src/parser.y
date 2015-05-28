@@ -15,6 +15,7 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 
 ast_node *root;
 
@@ -106,8 +107,8 @@ function_call_arguments : /* no arguments */ {}
                         | function_call_arguments COMMA expression {}
                         ;
 
-use : USE IDENTIFIER
-    | USE LT IDENTIFIER GT
+use : USE IDENTIFIER { ast_use_create($2, false); free($2); }
+    | USE LT IDENTIFIER GT { ast_use_create($3, true); free($3); }
     ;
 
 identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); }
