@@ -63,7 +63,7 @@ typedef struct ast_node {
 
 ast_node *ast_number_create(double value);
 
-ast_node *ast_string_create(char *value)
+ast_node *ast_string_create(char *value);
 
 ast_node *ast_variable_create(char *name);
 
