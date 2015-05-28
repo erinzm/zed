@@ -86,9 +86,9 @@ void ast_node_free(ast_node *node) {
 		case AST_TYPE_FNCALL: {
 			FREE_IF_EXISTS(node->fncall.name);
 			for(unsigned int i=0; i<node->fncall.argc; i++) {
-                ast_node_free(node->fncall.args[i]); // recursively free those sub-asts
-            }
-            free(node->fncall.args);
+	      ast_node_free(node->fncall.args[i]); // recursively free those sub-asts
+      }
+      free(node->fncall.args);
 		}
 	}
 
