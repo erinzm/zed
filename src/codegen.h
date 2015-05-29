@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "util.h"
+#include "lib/sds/sds.h"
 
 #ifndef _codegen_h
 #define _codegen_h
