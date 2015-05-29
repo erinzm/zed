@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include "ast.h"
 #include "util.h"
 #include "lib/sds/sds.h"
 
