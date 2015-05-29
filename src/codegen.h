@@ -1,6 +1,6 @@
 /*
 * ast.h
-* an ast for COMPILER IN A WEEK
+* a code generator for COMPILER IN A WEEK
 *
 * GPLv3 Liam Marshall 2015
 */
