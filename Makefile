@@ -20,7 +20,7 @@ all: clean ciaw test
 %.c: %.l
 	$(FLEX) $(FLEXFLAGS) -o $@ $<
 
-ciaw: src/ast.o src/parser.o src/lexer.o src/main.o
+ciaw: src/lib/sds/sds.o src/ast.o src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 .PHONY: test
@@ -29,4 +29,4 @@ test: $(TESTS)
 
 .PHONY: clean
 clean:
-	rm -f src/*.o src/parser.h src/{parser,lexer}.c ciaw lextest
+	rm -f src/*.o src/lib/**/*.o src/parser.h src/{parser,lexer}.c ciaw lextest
