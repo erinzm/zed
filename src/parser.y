@@ -71,13 +71,13 @@ int yylex();
 
 program : statements {}
 
-statements : statement
-           | statements statement
+statements : statement { printf("%s", codegen($1)); }
+           | statements statement { printf("%s", codegen($2)); }
            ;
 
 statement : variable_declaration EOS
           | function_declaration EOS
-          | function_call        EOS { printf("%s", codegen($$)); }
+          | function_call        EOS
           | variable_assignment  EOS
           | expression           EOS
           | use                  EOS
