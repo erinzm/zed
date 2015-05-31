@@ -138,7 +138,6 @@ expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
            | number
            | string
            | expression binop expression { $$ = ast_binary_op_create($2, $1, $3);}
-           | identifier
            ;
 
 %%
