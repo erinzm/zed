@@ -22,6 +22,17 @@ ast_node *ast_variable_create(char *name) {
 	return node;
 }
 
+ast_node *ast_fncall_create(char *name, ast_node **args, int argc) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	node->type = AST_TYPE_FNCALL;
+	node->fncall.name = strdup(name);
+	// Shallow copy arguments
+	node->fncall.args = malloc(sizeof(ast_node*) * argc);
+	memcpy(node->fncall.args, args, sizeof(ast_node*) * argc);
+	node->fncall.argc = argc;
+	return node;
+}
+
 ast_node *ast_binary_op_create(ast_type_binop op, ast_node *lhs, ast_node *rhs) {
 	ast_node *node = STRUCT_INSTANCE(ast_node);
 	node->type = AST_TYPE_BINARY_OP;
