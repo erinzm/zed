@@ -113,8 +113,8 @@ function_call_arguments : /* no arguments */ { $$.count = 0; $$.args = NULL; }
                           $1.args[$1.count-1] = $3; $$ = $1;}
                         ;
 
-use : USE IDENTIFIER { ast_use_create($2, false); free($2); }
-    | USE LT IDENTIFIER GT { ast_use_create($3, true); free($3); }
+use : USE IDENTIFIER { $$ = ast_use_create($2, false); free($2); }
+    | USE LT IDENTIFIER GT { $$ = ast_use_create($3, true); free($3); }
     ;
 
 identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); }
