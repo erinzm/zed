@@ -101,6 +101,8 @@ void ast_node_free(ast_node *node) {
       }
       free(node->fncall.args);
 		}
+		default:
+			break;
 	}
 
 	free(node); // free the rest of the struct
