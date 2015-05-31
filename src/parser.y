@@ -87,11 +87,11 @@ block : OPENBRACE statements CLOSEBRACE
       | OPENBRACE CLOSEBRACE
       ;
 
-variable_declaration : identifier identifier {}
-                     | identifier identifier ASSIGN expression {}
+variable_declaration : IDENTIFIER IDENTIFIER {}
+                     | IDENTIFIER IDENTIFIER ASSIGN expression {}
                      ;
 
-variable_assignment : identifier ASSIGN expression {}
+variable_assignment : IDENTIFIER ASSIGN expression {}
 
 function_declaration : FN IDENTIFIER IDENTIFIER OPENPAREN function_decl_arguments CLOSEPAREN block {}
                      ;
