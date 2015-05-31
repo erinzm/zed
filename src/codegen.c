@@ -79,6 +79,10 @@ char *codegen(ast_node *node) {
       return codegen_fncall(node);
     case AST_TYPE_USE:
       return codegen_use(node);
+    case AST_TYPE_BINARY_OP:
+      return codegen_binary_op(node);
+    case AST_TYPE_VARIABLE:
+      return codegen_variable(node);
     default:
       return "";
   }
