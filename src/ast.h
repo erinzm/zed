@@ -21,7 +21,8 @@ typedef enum ast_node_type {
 	AST_TYPE_VARIABLE,
 	AST_TYPE_BINARY_OP,
 	AST_TYPE_USE,
-	AST_TYPE_FNCALL
+	AST_TYPE_FNCALL,
+	AST_TYPE_ASSIGNMENT
 } ast_node_type;
 
 typedef enum ast_type_binop {
@@ -55,6 +56,11 @@ typedef struct ast_use {
 	bool isC;
 } ast_use;
 
+typedef struct ast_assignment {
+	struct ast_node *lhs;
+	struct ast_node *rhs;
+} ast_assignment;
+
 typedef struct ast_fncall {
 	char *name;
 	struct ast_node **args;
@@ -69,6 +75,7 @@ typedef struct ast_node {
 		ast_variable variable;
 		ast_binary_op binary_op;
 		ast_use use;
+		ast_assignment assignment;
 		ast_fncall fncall;
 	};
 } ast_node;
@@ -88,6 +95,8 @@ ast_node *ast_fncall_create(char *name, ast_node **args,
     int argc);
 
 ast_node *ast_use_create(char *value, bool isC);
+
+ast_node *ast_assignment_create(ast_node *lhs, ast_node *rhs);
 
 void dump_ast_node(ast_node *node);
 

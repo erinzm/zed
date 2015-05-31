@@ -50,6 +50,14 @@ ast_node *ast_use_create(char *value, bool isC) {
 	return node;
 }
 
+ast_node *ast_assignment_create(ast_node *lhs, ast_node *rhs) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	node->type = AST_TYPE_ASSIGNMENT;
+	node->assignment.lhs = lhs;
+	node->assignment.rhs = rhs;
+	return node;
+}
+
 void dump_ast_node(ast_node *node) {
 	printf("=== node dump ===\n");
 	switch(node->type) {
