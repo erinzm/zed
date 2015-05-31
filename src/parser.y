@@ -61,7 +61,7 @@ int yylex();
 %left ADDITION SUBTRACTION
 %left MULTIPLICATION DIVISION MODULO
 
-%type <node> expression number identifier variable_declaration function_declaration function_call statement string use
+%type <node> expression number identifier variable_declaration variable_assignment function_declaration function_call statement string use
 %type <fncall_args> function_call_arguments
 %type <token> binop
 
@@ -91,7 +91,7 @@ variable_declaration : IDENTIFIER IDENTIFIER {}
                      | IDENTIFIER IDENTIFIER ASSIGN expression {}
                      ;
 
-variable_assignment : IDENTIFIER ASSIGN expression {}
+variable_assignment : identifier ASSIGN expression { $$ = ast_assignment_create($1, $3); }
 
 function_declaration : FN IDENTIFIER IDENTIFIER OPENPAREN function_decl_arguments CLOSEPAREN block {}
                      ;
