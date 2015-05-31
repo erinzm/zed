@@ -20,6 +20,10 @@ char *codegen_number(ast_node *node);
 char *codegen_string(ast_node *node);
 char *codegen_fncall(ast_node *node);
 char *codegen_use(ast_node *node);
+char *codegen_binary_op(ast_node *node);
+char *codegen_variable(ast_node *node);
+
+char *codegen_getBinOp(ast_type_binop op);
 
 char *codegen(ast_node *node);
 
