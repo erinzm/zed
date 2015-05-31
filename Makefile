@@ -26,7 +26,7 @@ all: clean zed test
 %.c: %.l
 	$(FLEX) $(FLEXFLAGS) -o $@ $<
 
-zed: $(DEPSOBJS) src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
+zed: $(DEPSOBJS) src/util.o src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 .PHONY: test
