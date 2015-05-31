@@ -20,6 +20,6 @@ char *codegen_number(ast_node *node);
 char *codegen_string(ast_node *node);
 char *codegen_fncall(ast_node *node);
 
-char *codegen(ast_node *root_node);
+char *codegen(ast_node *node);
 
 #endif
