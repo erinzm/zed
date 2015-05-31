@@ -2,14 +2,20 @@ CC=gcc
 FLEX=flex
 BISON=bison
 
+DEPSPATH=deps
+
 FLEXFLAGS+=
 BISONFLAGS+=
-CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Winit-self -Wfloat-equal -Wformat=2 -Wno-unused-function -Wno-format-nonliteral -g -std=gnu11
+CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Winit-self -Wfloat-equal -Wformat=2 -Wno-unused-function -Wno-format-nonliteral -g -std=gnu11 -I$(DEPSPATH)
 LDFLAGS+=-lm
+
+DEPSSRC = $(wildcard deps/*/*.c)
+DEPSOBJS = $(DEPSSRC:.c=.o)
 
 TESTS=$(wildcard test/*.c)
 
 all: clean zed test
+
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -20,7 +26,7 @@ all: clean zed test
 %.c: %.l
 	$(FLEX) $(FLEXFLAGS) -o $@ $<
 
-zed: src/lib/sds/sds.o src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
+zed: $(DEPSOBJS) src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 .PHONY: test
