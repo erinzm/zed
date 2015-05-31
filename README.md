@@ -10,7 +10,8 @@ Get Flex and Bison, and GCC (or clang, but it's not a priority of mine to suppor
 Then, just run `make`.
 
 ## License:
-Zed: a very simple compiler implemented in a week
+Zed: a very simple compiler
+
 Copyright (C) 2015  Liam Marshall
 
 This program is free software: you can redistribute it and/or modify

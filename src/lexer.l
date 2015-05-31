@@ -1,7 +1,7 @@
 %option noyywrap yylineno nounput
 %{
 /*************************************
- * Flex lexer for Compiler In a Week
+ * Flex lexer for Zed
  *
  * lexer.l
  *

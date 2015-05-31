@@ -1,6 +1,6 @@
 /*
  * ast.h
- * an ast for COMPILER IN A WEEK
+ * an ast for Zed
  *
  * GPLv3 Liam Marshall 2015
  */

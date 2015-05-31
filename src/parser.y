@@ -1,6 +1,6 @@
 %{
 /*************************************
- * Bison parser for Compiler In a Week
+ * Bison parser for Zed
  *
  * parser.y
  *
