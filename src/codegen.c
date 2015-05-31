@@ -19,6 +19,9 @@ char *codegen_fncall(ast_node *node) {
   sds s;
   s = sdsnew(node->fncall.name);
   s = sdscat(s, "(");
+  for (unsigned int i = 0; i < node->fncall.argc; i++) {
+    s = sdscat(s, codegen(node->fncall.args[i])); // yay recusive descent!
+  }
   s = sdscat(s, ")");
   return s;
 }
