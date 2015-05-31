@@ -61,7 +61,7 @@ int yylex();
 %left ADDITION SUBTRACTION
 %left MULTIPLICATION DIVISION MODULO
 
-%type <node> expression identifier number variable_declaration function_declaration function_call statement string use
+%type <node> expression number identifier variable_declaration function_declaration function_call statement string use
 %type <fncall_args> function_call_arguments
 %type <token> binop
 
@@ -138,6 +138,7 @@ expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }
            | number
            | string
            | expression binop expression { $$ = ast_binary_op_create($2, $1, $3);}
+           | identifier
            ;
 
 %%
