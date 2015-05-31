@@ -96,7 +96,7 @@ variable_assignment : identifier ASSIGN expression {}
 function_declaration : FN IDENTIFIER IDENTIFIER OPENPAREN function_decl_arguments CLOSEPAREN block {}
                      ;
 
-function_call : identifier OPENPAREN function_call_arguments CLOSEPAREN
+function_call : IDENTIFIER OPENPAREN function_call_arguments CLOSEPAREN { $$ = ast_fncall_create($1, $3.args, $3.count); free($1); free($3.args);}
               ;
 
 function_decl_arguments : /* no arguments */ {}
