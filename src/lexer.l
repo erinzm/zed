@@ -72,7 +72,7 @@ void yyerror(char *s, ...);
 true                    {yylval.number  = 1; return BOOLEAN;}
 false                   {yylval.number  = 0; return BOOLEAN;}
 [a-z_][a-zA-Z0-9_]*       {yylval.string  = strdup(yytext); return IDENTIFIER;}
-\"(\\.|[^\\"])*\"       {yylval.string = strdup(yytext); return STRING;}
+\"(\\.|[^\\"])*\"       {yylval.string = strdup(chopStringTips(yytext)); return STRING;}
 
    /* everything else */
 .                       {yyerror("mystery character '%c' on line '%d'", yytext, yylineno);}
