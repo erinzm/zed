@@ -52,6 +52,23 @@ char *codegen_variable(ast_node *node) {
   return s; // handling code may go before here, so declaring a new sds isn't as worthless as it seems.
 }
 
+char *codegen_getBinOp(ast_type_binop op) {
+  switch(op) {
+    case AST_BINOP_ADD:
+      return "+";
+    case AST_BINOP_SUB:
+      return "-";
+    case AST_BINOP_MUL:
+      return "*";
+    case AST_BINOP_DIV:
+      return "/";
+    case AST_BINOP_MOD:
+      return "%";
+    default:
+      return "";
+  }
+}
+
 char *codegen(ast_node *node) {
   switch (node->type) {
     case AST_TYPE_NUMBER:
