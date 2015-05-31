@@ -17,6 +17,9 @@ parser.c
 lexer.h
 lexer.c
 
+# Coredumps
+core
+
 # Precompiled Headers
 *.gch
 *.pch
