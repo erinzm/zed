@@ -77,7 +77,7 @@ statements : statement
 
 statement : variable_declaration EOS
           | function_declaration EOS
-          | function_call        EOS
+          | function_call        EOS { printf("%s", codegen($$)); }
           | variable_assignment  EOS
           | expression           EOS
           | use                  EOS
