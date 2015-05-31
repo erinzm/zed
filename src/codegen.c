@@ -46,6 +46,12 @@ char *codegen_binary_op(ast_node *node) {
   s = sdscat(s, codegen(node->binary_op.rhs));
   return s;
 }
+
+char *codegen_variable(ast_node *node) {
+  sds s = sdsnew(node->variable.name);
+  return s; // handling code may go before here, so declaring a new sds isn't as worthless as it seems.
+}
+
 char *codegen(ast_node *node) {
   switch (node->type) {
     case AST_TYPE_NUMBER:
