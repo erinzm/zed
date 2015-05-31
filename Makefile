@@ -4,7 +4,7 @@ BISON=bison
 
 FLEXFLAGS+=
 BISONFLAGS+=
-CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Winit-self -Wfloat-equal -Wformat=2 -Wno-unused-function -g -std=gnu11
+CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Winit-self -Wfloat-equal -Wformat=2 -Wno-unused-function -Wno-format-nonliteral -g -std=gnu11
 LDFLAGS+=-lm
 
 TESTS=$(wildcard test/*.c)
