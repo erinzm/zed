@@ -26,4 +26,15 @@ char *codegen_fncall(ast_node *node) {
   return s;
 }
 
-char *codegen(ast_node *root_node);
+char *codegen(ast_node *node) {
+  switch (node->type) {
+    case AST_TYPE_NUMBER:
+      return codegen_number(node);
+    case AST_TYPE_STRING:
+      return codegen_string(node);
+    case AST_TYPE_FNCALL:
+      return codegen_fncall(node);
+    default:
+      return "";
+  }
+}
