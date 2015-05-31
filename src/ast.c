@@ -120,6 +120,10 @@ void ast_node_free(ast_node *node) {
       }
       free(node->fncall.args);
 		}
+		case AST_TYPE_ASSIGNMENT: {
+			FREE_IF_EXISTS(node->assignment.lhs);
+			FREE_IF_EXISTS(node->assignment.rhs);
+		}
 	}
 
 	free(node); // free the rest of the struct
