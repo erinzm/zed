@@ -26,7 +26,6 @@ lexer.c
 *.a
 *.la
 *.lo
-deps
 
 # Shared objects (inc. Windows DLLs)
 *.dll
