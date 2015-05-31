@@ -104,9 +104,13 @@ function_decl_arguments : /* no arguments */ {}
                    | function_decl_arguments COMMA variable_declaration {}
                    ;
 
-function_call_arguments : /* no arguments */ {}
-                        | expression {}
-                        | function_call_arguments COMMA expression {}
+function_call_arguments : /* no arguments */ { $$.count = 0; $$.args = NULL; }
+                        | expression { $$.count = 1;
+                          $$.args = malloc(sizeof(ast_node*));
+                          $$.args[0] = $1;}
+                        | function_call_arguments COMMA expression {$1.count++;
+                          $1.args = realloc($1.args, sizeof(ast_node*) * $1.count);
+                          $1.args[$1.count-1] = $3; $$ = $1;}
                         ;
 
 use : USE IDENTIFIER { ast_use_create($2, false); free($2); }
