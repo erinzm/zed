@@ -40,6 +40,12 @@ char *codegen_use(ast_node *node) {
   }
 }
 
+char *codegen_binary_op(ast_node *node) {
+  sds s = sdsnew(codegen(node->binary_op.lhs));
+  s = sdscat(s, codegen_getBinOp(node->binary_op.op));
+  s = sdscat(s, codegen(node->binary_op.rhs));
+  return s;
+}
 char *codegen(ast_node *node) {
   switch (node->type) {
     case AST_TYPE_NUMBER:
