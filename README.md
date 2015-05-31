@@ -1,5 +1,5 @@
-# COMPILER IN A WEEK
-[![Build Status](https://travis-ci.org/ArchimedesPi/compilerinaweek.svg?branch=master)](https://travis-ci.org/ArchimedesPi/compilerinaweek)
+# Zed
+[![Build Status](https://travis-ci.org/ArchimedesPi/zed.svg?branch=master)](https://travis-ci.org/ArchimedesPi/zed)
 
 I just started reading **"Compilers: Principles, Techniques and Tools"**,
 and thought it would be fun to implement a **very** simple compiler.
@@ -10,7 +10,7 @@ Get Flex and Bison, and GCC (or clang, but it's not a priority of mine to suppor
 Then, just run `make`.
 
 ## License:
-COMPILER IN A WEEK: a very simple compiler implemented in a week
+Zed: a very simple compiler implemented in a week
 Copyright (C) 2015  Liam Marshall
 
 This program is free software: you can redistribute it and/or modify
