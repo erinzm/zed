@@ -9,7 +9,7 @@ LDFLAGS+=-lm
 
 TESTS=$(wildcard test/*.c)
 
-all: clean ciaw test
+all: clean zed test
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -20,7 +20,7 @@ all: clean ciaw test
 %.c: %.l
 	$(FLEX) $(FLEXFLAGS) -o $@ $<
 
-ciaw: src/lib/sds/sds.o src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
+zed: src/lib/sds/sds.o src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 .PHONY: test
@@ -29,4 +29,4 @@ test: $(TESTS)
 
 .PHONY: clean
 clean:
-	rm -f src/*.o src/lib/**/*.o src/parser.h src/{parser,lexer}.c ciaw lextest
+	rm -f src/*.o src/lib/**/*.o src/parser.h src/{parser,lexer}.c zed
