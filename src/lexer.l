@@ -13,6 +13,7 @@
 
 #include "ast.h"
 #include "parser.h"
+#include "util.h"
 
 #include <stdio.h>
 #include <math.h>
