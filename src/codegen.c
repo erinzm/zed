@@ -27,6 +27,19 @@ char *codegen_fncall(ast_node *node) {
   return s;
 }
 
+char *codegen_use(ast_node *node) {
+  if (node->use.isC) {
+    sds header = sdsnew(node->use.value);
+    header = sdscat(header, ".h");
+    sds s = sdsnew("#include <");
+    s = sdscat(s, header);
+    s = sdscat(s, ">");
+    return s;
+  } else {
+    return ""; // not implemented yet
+  }
+}
+
 char *codegen(ast_node *node) {
   switch (node->type) {
     case AST_TYPE_NUMBER:
@@ -35,6 +48,8 @@ char *codegen(ast_node *node) {
       return codegen_string(node);
     case AST_TYPE_FNCALL:
       return codegen_fncall(node);
+    case AST_TYPE_USE:
+      return codegen_use(node);
     default:
       return "";
   }
