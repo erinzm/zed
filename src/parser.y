@@ -18,6 +18,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+ast_node *parsetree;
+
 void yyerror(const char *s, ...);
 int yylex();
 
@@ -26,7 +28,6 @@ int yylex();
 %code requires {
   #include "ast.h"
 }
-
 
 %union {
   double number;
@@ -72,7 +73,7 @@ int yylex();
 
 %%
 
-program : statements {printf("%s", codegen(ast_statements_create($1.statements, $1.count)));}
+program : statements {parsetree = ast_statements_create($1.statements, $1.count, false);}
 
 statements : statement { $$.count = 1;
             $$.statements = malloc(sizeof(ast_node*));
