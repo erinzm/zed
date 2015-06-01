@@ -103,6 +103,7 @@ variable_declaration : IDENTIFIER IDENTIFIER {}
 variable_assignment : identifier ASSIGN expression { $$ = ast_assignment_create($1, $3); }
 
 function_declaration : FN IDENTIFIER IDENTIFIER OPENPAREN function_decl_arguments CLOSEPAREN block {}
+                     | FN IDENTIFIER IDENTIFIER block {}
                      ;
 
 function_call : IDENTIFIER OPENPAREN function_call_arguments CLOSEPAREN { $$ = ast_fncall_create($1, $3.args, $3.count); free($1); free($3.args);}
