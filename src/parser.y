@@ -72,7 +72,7 @@ int yylex();
 
 %%
 
-program : statements {}
+program : statements {printf("%s", codegen(ast_statements_create($1.statements, $1.count)));}
 
 statements : statement { printf("%s", codegen($1)); }
            | statements statement { printf("%s", codegen($2)); }
