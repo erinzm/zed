@@ -64,7 +64,7 @@ char *codegen_statements(ast_node *node) {
   if (node->type == AST_TYPE_BLOCK) s = sdscat(s, "{\n");
   for (unsigned int i = 0; i < node->statements.count; i++) {
     s = sdscat(s, codegen(node->statements.nodes[i]));
-    switch(node->type) {
+    switch((node->statements.nodes[i])->type) {
       case AST_TYPE_USE:
         break;
       case AST_TYPE_BLOCK:
