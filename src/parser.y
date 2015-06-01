@@ -74,8 +74,12 @@ int yylex();
 
 program : statements {printf("%s", codegen(ast_statements_create($1.statements, $1.count)));}
 
-statements : statement { printf("%s", codegen($1)); }
-           | statements statement { printf("%s", codegen($2)); }
+statements : statement { $$.count = 1;
+            $$.statements = malloc(sizeof(ast_node*));
+            $$.statements[0] = $1; }
+           | statements statement { $1.count++;
+             $1.statements = realloc($1.statements, sizeof(ast_node*) * $1.count);
+             $1.statements[$1.count - 1] = $2; $$ = $1; }
            ;
 
 statement : variable_declaration EOS
