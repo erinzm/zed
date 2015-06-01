@@ -96,8 +96,8 @@ block : OPENBRACE statements CLOSEBRACE { $$ = ast_block_create($2.statements, $
       | OPENBRACE CLOSEBRACE { $$ = ast_block_create(NULL, 0); }
       ;
 
-variable_declaration : IDENTIFIER IDENTIFIER {}
-                     | IDENTIFIER IDENTIFIER ASSIGN expression {}
+variable_declaration : IDENTIFIER IDENTIFIER
+                     | IDENTIFIER IDENTIFIER ASSIGN expression
                      ;
 
 variable_assignment : identifier ASSIGN expression { $$ = ast_assignment_create($1, $3); }
