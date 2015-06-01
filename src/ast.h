@@ -22,7 +22,9 @@ typedef enum ast_node_type {
 	AST_TYPE_BINARY_OP,
 	AST_TYPE_USE,
 	AST_TYPE_FNCALL,
-	AST_TYPE_ASSIGNMENT
+	AST_TYPE_ASSIGNMENT,
+	AST_TYPE_STATEMENTS,
+	AST_TYPE_BLOCK
 } ast_node_type;
 
 typedef enum ast_type_binop {
@@ -67,6 +69,11 @@ typedef struct ast_fncall {
 	unsigned int argc;
 } ast_fncall;
 
+typedef struct ast_statements {
+	struct ast_node **nodes;
+	unsigned int count;
+} ast_statements;
+
 typedef struct ast_node {
 	ast_node_type type;
 	union {
@@ -77,6 +84,7 @@ typedef struct ast_node {
 		ast_use use;
 		ast_assignment assignment;
 		ast_fncall fncall;
+		ast_statements statements;
 	};
 } ast_node;
 
@@ -93,6 +101,8 @@ ast_node *ast_binary_op_create(ast_type_binop op,
 
 ast_node *ast_fncall_create(char *name, ast_node **args,
     int argc);
+
+ast_node *ast_statements_create(ast_node **nodes, int count, bool isBlock);
 
 ast_node *ast_use_create(char *value, bool isC);
 

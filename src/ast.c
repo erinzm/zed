@@ -58,6 +58,18 @@ ast_node *ast_assignment_create(ast_node *lhs, ast_node *rhs) {
 	return node;
 }
 
+ast_node *ast_statements_create(ast_node **nodes, int count, bool isBlock) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	if (isBlock) {
+		node->type = AST_TYPE_BLOCK;
+	} else {
+		node->type = AST_TYPE_STATEMENTS;
+	}
+	node->statements.nodes = nodes;
+	node->statements.count = count;
+	return node;
+}
+
 void dump_ast_node(ast_node *node) {
 	printf("=== node dump ===\n");
 	switch(node->type) {
@@ -83,6 +95,17 @@ void dump_ast_node(ast_node *node) {
 			INSPECT(node->binary_op.op, "%i");
 			dump_ast_node(node->binary_op.lhs);
 			dump_ast_node(node->binary_op.rhs);
+			break;
+		case AST_TYPE_STATEMENTS:
+		case AST_TYPE_BLOCK:
+			if (node->type == AST_TYPE_STATEMENTS) {
+				printf("node->type == AST_TYPE_STATEMENTS\n");
+			} else if (node->type == AST_TYPE_BLOCK) {
+				printf("node->type == AST_TYPE_BLOCK\n");
+			}
+			for (unsigned int i = 0; i < node->statements.count; i++) {
+				dump_ast_node(node->statements.nodes[i]);
+			}
 			break;
 		default:
 			break;
@@ -112,17 +135,28 @@ void ast_node_free(ast_node *node) {
 		}
 		case AST_TYPE_USE: {
 			FREE_IF_EXISTS(node->use.value);
+			break;
 		}
 		case AST_TYPE_FNCALL: {
 			FREE_IF_EXISTS(node->fncall.name);
 			for(unsigned int i=0; i<node->fncall.argc; i++) {
 	      ast_node_free(node->fncall.args[i]); // recursively free those sub-asts
       }
-      free(node->fncall.args);
+      FREE_IF_EXISTS(node->fncall.args);
+			break;
 		}
 		case AST_TYPE_ASSIGNMENT: {
 			FREE_IF_EXISTS(node->assignment.lhs);
 			FREE_IF_EXISTS(node->assignment.rhs);
+			break;
+		}
+		case AST_TYPE_BLOCK:
+		case AST_TYPE_STATEMENTS: {
+			for (unsigned int i = 0; i < node->statements.count; i++) {
+				ast_node_free(node->statements.nodes[i]);
+			}
+			FREE_IF_EXISTS(node->statements.nodes);
+			break;
 		}
 	}
 
