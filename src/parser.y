@@ -82,12 +82,13 @@ statements : statement { $$.count = 1;
              $1.statements[$1.count - 1] = $2; $$ = $1; }
            ;
 
-statement : variable_declaration EOS
-          | function_declaration EOS
-          | function_call        EOS
-          | variable_assignment  EOS
-          | expression           EOS
-          | use                  EOS
+statement : variable_declaration EOS { $$ = $1; }
+          | function_declaration EOS { $$ = $1; }
+          | function_call        EOS { $$ = $1; }
+          | variable_assignment  EOS { $$ = $1; }
+          | expression           EOS { $$ = $1; }
+          | use                  EOS { $$ = $1; }
+          | block                EOS { $$ = $1; }
           ;
 
 block : OPENBRACE statements CLOSEBRACE
