@@ -69,6 +69,8 @@ char *codegen_statements(ast_node *node) {
         break;
       case AST_TYPE_BLOCK:
         break;
+      case AST_TYPE_FUNCTION:
+        break;
       default:
         s = sdscat(s, ";");
         break;
