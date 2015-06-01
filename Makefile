@@ -33,6 +33,12 @@ zed: $(DEPSOBJS) src/util.o src/ast.o src/codegen.o src/parser.o src/lexer.o src
 test: $(TESTS)
 	@sh tests/runtests.sh
 
+watch:
+	while true ; do \
+		make all; \
+		inotifywait -qre close_write .;\
+	done
+
 .PHONY: clean
 clean:
 	rm -f src/*.o src/lib/**/*.o src/parser.h src/{parser,lexer}.c zed
