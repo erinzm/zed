@@ -23,6 +23,7 @@ char *codegen_use(ast_node *node);
 char *codegen_binary_op(ast_node *node);
 char *codegen_variable(ast_node *node);
 char *codegen_assignment(ast_node *node);
+char *codegen_statements(ast_node *node);
 
 char *codegen_getBinOp(ast_type_binop op);
 

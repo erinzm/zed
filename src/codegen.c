@@ -59,6 +59,26 @@ char *codegen_assignment(ast_node *node) {
   return s;
 }
 
+char *codegen_statements(ast_node *node) {
+  sds s = sdsnew("");
+  if (node->type == AST_TYPE_BLOCK) s = sdscat(s, "{\n");
+  for (unsigned int i = 0; i < node->statements.count; i++) {
+    s = sdscat(s, codegen(node->statements.nodes[i]));
+    switch(node->type) {
+      case AST_TYPE_USE:
+        break;
+      case AST_TYPE_BLOCK:
+        break;
+      default:
+        s = sdscat(s, ";");
+        break;
+    }
+    s = sdscat(s, "\n");
+  }
+  if (node->type == AST_TYPE_BLOCK) s = sdscat(s, "}");
+  return s;
+}
+
 char *codegen_getBinOp(ast_type_binop op) {
   switch(op) {
     case AST_BINOP_ADD:
@@ -92,6 +112,9 @@ char *codegen(ast_node *node) {
       return codegen_variable(node);
     case AST_TYPE_ASSIGNMENT:
       return codegen_assignment(node);
+    case AST_TYPE_BLOCK:
+    case AST_TYPE_STATEMENTS:
+      return codegen_statements(node);
     default:
       return "";
   }
