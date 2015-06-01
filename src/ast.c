@@ -70,6 +70,17 @@ ast_node *ast_statements_create(ast_node **nodes, int count, bool isBlock) {
 	return node;
 }
 
+ast_node *ast_function_create(char *name, char *type, ast_node *innerBlock, ast_node **arguments, unsigned int argc) {
+	ast_node *node = STRUCT_INSTANCE(ast_node);
+	node->type = AST_TYPE_FUNCTION;
+	node->function.name = strdup(name);
+	node->function.type = strdup(type);
+	node->function.innerBlock = innerBlock;
+	node->function.arguments = arguments;
+	node->function.argc = argc;
+	return node;
+}
+
 void dump_ast_node(ast_node *node) {
 	printf("=== node dump ===\n");
 	switch(node->type) {
@@ -96,6 +107,13 @@ void dump_ast_node(ast_node *node) {
 			dump_ast_node(node->binary_op.lhs);
 			dump_ast_node(node->binary_op.rhs);
 			break;
+		case AST_TYPE_FNCALL:
+			printf("node->type == AST_TYPE_FNCALL\n");
+			INSPECT(node->fncall.name, "%s");
+			for (unsigned int i = 0; i < node->fncall.argc; i++) {
+				dump_ast_node(node->fncall.args[i]);
+			}
+			break;
 		case AST_TYPE_STATEMENTS:
 		case AST_TYPE_BLOCK:
 			if (node->type == AST_TYPE_STATEMENTS) {
@@ -105,6 +123,15 @@ void dump_ast_node(ast_node *node) {
 			}
 			for (unsigned int i = 0; i < node->statements.count; i++) {
 				dump_ast_node(node->statements.nodes[i]);
+			}
+			break;
+		case AST_TYPE_FUNCTION:
+			printf("node->type == AST_TYPE_FUNCTION\n");
+			INSPECT(node->function.name, "%s");
+			INSPECT(node->function.type, "%s");
+			dump_ast_node(node->function.innerBlock);
+			for (unsigned int i = 0; i < node->function.argc; i++) {
+				dump_ast_node(node->function.arguments[i]);
 			}
 			break;
 		default:
@@ -155,7 +182,12 @@ void ast_node_free(ast_node *node) {
 			for (unsigned int i = 0; i < node->statements.count; i++) {
 				ast_node_free(node->statements.nodes[i]);
 			}
-			FREE_IF_EXISTS(node->statements.nodes);
+			break;
+		}
+		case AST_TYPE_FUNCTION: {
+			FREE_IF_EXISTS(node->function.name);
+			FREE_IF_EXISTS(node->function.type);
+			ast_node_free(node->function.innerBlock);
 			break;
 		}
 	}

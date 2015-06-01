@@ -24,7 +24,9 @@ typedef enum ast_node_type {
 	AST_TYPE_FNCALL,
 	AST_TYPE_ASSIGNMENT,
 	AST_TYPE_STATEMENTS,
-	AST_TYPE_BLOCK
+	AST_TYPE_BLOCK, /* SUPER IMPORTANT REMINDER DO NOT FORGET: This is ALSO expressed with ast_statements! It's not a seperate type!
+		Just an annotation for ergonomics, and so we don't have to have ast_{statements, block}, because repetition is bad. */
+	AST_TYPE_FUNCTION
 } ast_node_type;
 
 typedef enum ast_type_binop {
@@ -45,6 +47,7 @@ typedef struct ast_string {
 
 typedef struct ast_variable {
 	char *name;
+	char *type;
 } ast_variable;
 
 typedef struct ast_binary_op {
@@ -74,6 +77,14 @@ typedef struct ast_statements {
 	unsigned int count;
 } ast_statements;
 
+typedef struct ast_function {
+	char *name;
+	char *type;
+	struct ast_node *innerBlock;
+	struct ast_node **arguments;
+	unsigned int argc;
+} ast_function;
+
 typedef struct ast_node {
 	ast_node_type type;
 	union {
@@ -85,6 +96,7 @@ typedef struct ast_node {
 		ast_assignment assignment;
 		ast_fncall fncall;
 		ast_statements statements;
+		ast_function function;
 	};
 } ast_node;
 
@@ -107,6 +119,8 @@ ast_node *ast_statements_create(ast_node **nodes, int count, bool isBlock);
 ast_node *ast_use_create(char *value, bool isC);
 
 ast_node *ast_assignment_create(ast_node *lhs, ast_node *rhs);
+
+ast_node *ast_function_create(char *name, char *type, ast_node *innerBlock, ast_node **arguments, unsigned int argc);
 
 void dump_ast_node(ast_node *node);
 
