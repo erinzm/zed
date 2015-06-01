@@ -18,8 +18,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-ast_node *root;
-
 void yyerror(const char *s, ...);
 int yylex();
 
