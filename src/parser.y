@@ -92,8 +92,8 @@ statement : variable_declaration EOS { $$ = $1; }
           | block                EOS { $$ = $1; }
           ;
 
-block : OPENBRACE statements CLOSEBRACE { $$ = ast_block_create($2.statements, $2.count); }
-      | OPENBRACE CLOSEBRACE { $$ = ast_block_create(NULL, 0); }
+block : OPENBRACE statements CLOSEBRACE {$$ = ast_statements_create($2.statements, $2.count, true);}
+      | OPENBRACE CLOSEBRACE {$$ = ast_statements_create(NULL, 0, true);}
       ;
 
 variable_declaration : IDENTIFIER IDENTIFIER
