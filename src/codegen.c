@@ -81,6 +81,21 @@ char *codegen_statements(ast_node *node) {
   return s;
 }
 
+char *codegen_function(ast_node *node) {
+  sds s = sdsnew("");
+  s = sdscat(s, node->function.type);
+  s = sdscat(s, " ");
+  s = sdscat(s, node->function.name);
+  s = sdscat(s, "(");
+  for (unsigned int i = 0; i < node->function.argc; i++) {
+    s = sdscat(s, codegen(node->function.arguments[i]));
+    if ((i + 1) < node->function.argc) s = sdscat(s, ",");
+  }
+  s = sdscat(s, ")");
+  s = sdscat(s, codegen(node->function.innerBlock));
+  return s;
+}
+
 char *codegen_getBinOp(ast_type_binop op) {
   switch(op) {
     case AST_BINOP_ADD:
@@ -117,6 +132,8 @@ char *codegen(ast_node *node) {
     case AST_TYPE_BLOCK:
     case AST_TYPE_STATEMENTS:
       return codegen_statements(node);
+    case AST_TYPE_FUNCTION:
+      return codegen_function(node);
     default:
       return "";
   }
