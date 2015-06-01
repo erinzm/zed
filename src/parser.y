@@ -36,6 +36,10 @@ int yylex();
     ast_node **args;
     int count;
   } fncall_args;
+  struct {
+    ast_node **statements;
+    int count;
+  } statements;
   int token;
 }
 
