@@ -41,6 +41,10 @@ int yylex();
     ast_node **statements;
     int count;
   } statements;
+  struct {
+    ast_node **args;
+    int count;
+  } fndecl_args;
   int token;
 }
 
@@ -67,6 +71,7 @@ int yylex();
 %type <node> expression number identifier variable_declaration variable_assignment function_declaration function_call statement string use block
 %type <fncall_args> function_call_arguments
 %type <statements> statements
+%type <fndecl_args> function_decl_arguments
 %type <token> binop
 
 %start program
@@ -102,16 +107,21 @@ variable_declaration : IDENTIFIER IDENTIFIER
 
 variable_assignment : identifier ASSIGN expression { $$ = ast_assignment_create($1, $3); }
 
-function_declaration : FN IDENTIFIER IDENTIFIER OPENPAREN function_decl_arguments CLOSEPAREN block {}
-                     | FN IDENTIFIER IDENTIFIER block {}
+function_declaration : FN IDENTIFIER IDENTIFIER OPENPAREN function_decl_arguments CLOSEPAREN block { $$ = ast_function_create($2, $3, $7, $5.args, $5.count);}
+                     | FN IDENTIFIER IDENTIFIER block { $$ = ast_function_create($2, $3, $4, NULL, 0); free($2); free($3); }
+                     | FN IDENTIFIER block { $$ = ast_function_create($2, "void", $3, NULL, 0); free($2);}
                      ;
 
 function_call : IDENTIFIER OPENPAREN function_call_arguments CLOSEPAREN { $$ = ast_fncall_create($1, $3.args, $3.count); free($1); free($3.args);}
               ;
 
-function_decl_arguments : /* no arguments */ {}
-                   | variable_declaration {}
-                   | function_decl_arguments COMMA variable_declaration {}
+function_decl_arguments : /* no arguments */ { $$.count = 0; $$.args = NULL; }
+                   | variable_declaration { $$.count = 1;
+                    $$.args = malloc(sizeof(ast_node*));
+                    $$.args[0] = $1;}
+                   | function_decl_arguments COMMA variable_declaration { $1.count++;
+                    $1.args = realloc($1.args, sizeof(ast_node*) * $1.count);
+                    $1.args[$1.count-1] = $3; $$ = $1;}
                    ;
 
 function_call_arguments : /* no arguments */ { $$.count = 0; $$.args = NULL; }
