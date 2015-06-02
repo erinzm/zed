@@ -8,5 +8,5 @@ use <stdio>;
 fn main {
   # Let's call a system function!
   printf("Hello World!\n"); # Yay cool, hello world!
-  printf("Hello, %s!", "World"); # an a template string too!
+  printf("Hello, %s!\n", "World"); # an a template string too!
 };
