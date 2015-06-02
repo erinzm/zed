@@ -6,7 +6,7 @@ DEPSPATH=deps
 
 FLEXFLAGS+=
 BISONFLAGS+=
-CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Winit-self -Wfloat-equal -Wformat=2 -Wno-unused-function -Wno-format-nonliteral -g -std=gnu11 -I$(DEPSPATH)
+CFLAGS+=-O2 -Wall -Wextra -Werror -Wpedantic -Winit-self -Wfloat-equal -Wformat=2 -Wno-unused-function -Wno-format-nonliteral -Wno-unused-parameter -g -std=gnu11 -I$(DEPSPATH)
 LDFLAGS+=-lm
 
 DEPSSRC = $(wildcard deps/*/*.c)
