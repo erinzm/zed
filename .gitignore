@@ -47,8 +47,7 @@ core
 *.i*86
 *.x86_64
 *.hex
-zed
-lextest
+zedc
 
 # Debug files
 *.dSYM/
