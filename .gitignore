@@ -16,6 +16,9 @@ parser.h
 parser.c
 lexer.h
 lexer.c
+
+# Coverity
+cov-int/
 zed.bz2
 
 # Coredumps
