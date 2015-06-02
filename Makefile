@@ -14,7 +14,7 @@ DEPSOBJS = $(DEPSSRC:.c=.o)
 
 TESTS=$(wildcard test/*.c)
 
-all: clean zedc test
+all: clean zed test
 
 
 %.o: %.c
@@ -26,7 +26,7 @@ all: clean zedc test
 %.c: %.l
 	$(FLEX) $(FLEXFLAGS) -o $@ $<
 
-zedc: $(DEPSOBJS) src/util.o src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
+zed: $(DEPSOBJS) src/util.o src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
 .PHONY: test
