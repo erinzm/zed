@@ -53,6 +53,9 @@ lextest
 # Debug files
 *.dSYM/
 
+### Zed ###
+*.zd.ir.c
+
 
 ### Linux ###
 *~
