@@ -16,6 +16,7 @@ parser.h
 parser.c
 lexer.h
 lexer.c
+zed.bz2
 
 # Coredumps
 core
