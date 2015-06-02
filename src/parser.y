@@ -137,7 +137,7 @@ use : USE IDENTIFIER { $$ = ast_use_create($2, false); free($2); }
     | USE LT IDENTIFIER GT { $$ = ast_use_create($3, true); free($3); }
     ;
 
-identifier : IDENTIFIER { $$ = ast_variable_create($1); free($1); }
+identifier : IDENTIFIER { $$ = ast_variable_create($1, ""); free($1); }
            ;
 
 number : INT { $$ = ast_number_create($1); }

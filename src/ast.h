@@ -106,7 +106,7 @@ ast_node *ast_number_create(double value);
 
 ast_node *ast_string_create(char *value);
 
-ast_node *ast_variable_create(char *name);
+ast_node *ast_variable_create(char *name, char *type);
 
 ast_node *ast_binary_op_create(ast_type_binop op,
     ast_node *lhs, ast_node *rhs);

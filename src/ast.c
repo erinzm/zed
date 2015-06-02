@@ -15,10 +15,11 @@ ast_node *ast_string_create(char *value) {
 	return node;
 }
 
-ast_node *ast_variable_create(char *name) {
+ast_node *ast_variable_create(char *name, char *type) {
 	ast_node *node = STRUCT_INSTANCE(ast_node);
 	node->type = AST_TYPE_VARIABLE;
 	node->variable.name = strdup(name);
+	node->variable.type = strdup(type);
 	return node;
 }
 
