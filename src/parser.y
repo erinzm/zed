@@ -101,8 +101,8 @@ block : OPENBRACE statements CLOSEBRACE {$$ = ast_statements_create($2.statement
       | OPENBRACE CLOSEBRACE {$$ = ast_statements_create(NULL, 0, true);}
       ;
 
-variable_declaration : IDENTIFIER IDENTIFIER { $$ = ast_variable_create($1, $2);}
-                     | IDENTIFIER IDENTIFIER ASSIGN expression { $$ = ast_assignment_create(ast_variable_create($1, $2), $4); }
+variable_declaration : IDENTIFIER IDENTIFIER { $$ = ast_variable_create($2, $1);}
+                     | IDENTIFIER IDENTIFIER ASSIGN expression { $$ = ast_assignment_create(ast_variable_create($2, $1), $4); }
                      ;
 
 variable_assignment : identifier ASSIGN expression { $$ = ast_assignment_create($1, $3); }
@@ -137,7 +137,7 @@ use : USE IDENTIFIER { $$ = ast_use_create($2, false); free($2); }
     | USE LT IDENTIFIER GT { $$ = ast_use_create($3, true); free($3); }
     ;
 
-identifier : IDENTIFIER { $$ = ast_variable_create($1, ""); free($1); }
+identifier : IDENTIFIER { $$ = ast_variable_create($1, NULL); free($1); }
            ;
 
 number : INT { $$ = ast_number_create($1); }

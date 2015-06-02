@@ -48,7 +48,12 @@ char *codegen_binary_op(ast_node *node) {
 }
 
 char *codegen_variable(ast_node *node) {
-  sds s = sdsnew(node->variable.name);
+  sds s = sdsnew("");
+  if (node->variable.type != NULL) {
+    s = sdscat(s, node->variable.type);
+    s = sdscat(s, " ");
+  }
+  s = sdscat(s, node->variable.name);
   return s; // handling code may go before here, so declaring a new sds isn't as worthless as it seems.
 }
 

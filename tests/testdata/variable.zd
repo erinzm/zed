@@ -1,0 +1,6 @@
+use <stdio>;
+
+fn main {
+	double aValue = 2.0;
+	printf("%f + 2 = %f", aValue, aValue+2);
+};

@@ -19,7 +19,11 @@ ast_node *ast_variable_create(char *name, char *type) {
 	ast_node *node = STRUCT_INSTANCE(ast_node);
 	node->type = AST_TYPE_VARIABLE;
 	node->variable.name = strdup(name);
-	node->variable.type = strdup(type);
+	if (type != NULL) {
+		node->variable.type = strdup(type);
+	} else {
+		node->variable.type = NULL;
+	}
 	return node;
 }
 
