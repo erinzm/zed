@@ -57,7 +57,7 @@ int main(int argc, char** argv) {
       if (doStdout) {
         printf("%s", codegen(parsetree));
       } else {
-        FILE *output = fopen(strcat(cmd.argv[0], ".ir.c"), "w");
+        FILE *output = fopen(strcat(basename(cmd.argv[0]), ".ir.c"), "w");
         fprintf(output, "%s", codegen(parsetree));
         fclose(output);
       }
