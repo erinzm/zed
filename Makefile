@@ -1,8 +1,8 @@
-CC=gcc
-FLEX=flex
-BISON=bison
+CC:=clang
+FLEX:=flex
+BISON:=bison
 
-PREFIX=/usr/local
+PREFIX:=/usr/local
 DEPSPATH=deps
 
 FLEXFLAGS+=
