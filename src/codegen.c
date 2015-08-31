@@ -38,7 +38,7 @@ char *codegen_use(ast_node *node) {
 
     return use;
   } else {
-    return ""; // not implemented yet
+    return sdsnew(""); // not implemented yet
   }
 }
 
