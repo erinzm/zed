@@ -43,10 +43,21 @@ char *codegen_use(ast_node *node) {
 }
 
 char *codegen_binary_op(ast_node *node) {
-  sds s = sdsnew(codegen(node->binary_op.lhs));
-  s = sdscat(s, codegen_getBinOp(node->binary_op.op));
-  s = sdscat(s, codegen(node->binary_op.rhs));
-  return s;
+  sds binop = sdsnew("");
+
+  sds lhs = codegen(node->binary_op.lhs);
+  sds op = codegen_getBinOp(node->binary_op.op);
+  sds rhs = codegen(node->binary_op.rhs);
+
+  binop = sdscat(binop, lhs);
+  binop = sdscat(binop, op);
+  binop = sdscat(binop, rhs);
+
+  sdsfree(op);
+  sdsfree(lhs);
+  sdsfree(rhs);
+
+  return binop;
 }
 
 char *codegen_variable(ast_node *node) {
