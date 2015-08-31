@@ -22,7 +22,6 @@ bool doStdout = false;
 
 int main(int argc, char** argv) {
   mode = C;
-  command_t cmd;
   if (!source) {
     printf("Can't open %s!\n", cmd.argv[0]);
     return 1;
