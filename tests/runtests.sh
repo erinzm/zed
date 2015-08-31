@@ -15,7 +15,6 @@ do
 			echo "$(tput setaf 1)$test's output (stdout+stderror):$(tput sgr0)"
 			cat /tmp/test.log
 			rm -f /tmp/test.log
-			exit 1
 		fi
 	fi
 done
