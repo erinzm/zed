@@ -46,7 +46,7 @@ char *codegen_binary_op(ast_node *node) {
   sds binop = sdsnew("");
 
   sds lhs = codegen(node->binary_op.lhs);
-  sds op = codegen_getBinOp(node->binary_op.op);
+  sds op = sdsnew(codegen_getBinOp(node->binary_op.op));
   sds rhs = codegen(node->binary_op.rhs);
 
   binop = sdscat(binop, lhs);
