@@ -107,18 +107,22 @@ char *codegen_statements(ast_node *node) {
 }
 
 char *codegen_function(ast_node *node) {
-  sds s = sdsnew("");
-  s = sdscat(s, node->function.type);
-  s = sdscat(s, " ");
-  s = sdscat(s, node->function.name);
-  s = sdscat(s, "(");
+  sds function = sdsnew("");
+  function = sdscat(function, node->function.type);
+  function = sdscat(function, " ");
+  function = sdscat(function, node->function.name);
+  function = sdscat(function, "(");
   for (unsigned int i = 0; i < node->function.argc; i++) {
-    s = sdscat(s, codegen(node->function.arguments[i]));
-    if ((i + 1) < node->function.argc) s = sdscat(s, ",");
+    sds argument = codegen(node->function.arguments[i]);
+    function = sdscat(function, argument);
+    sdsfree(argument);
+    if ((i + 1) < node->function.argc) function = sdscat(function, ",");
   }
-  s = sdscat(s, ")");
-  s = sdscat(s, codegen(node->function.innerBlock));
-  return s;
+  function = sdscat(function, ")");
+  sds innerBlock = codegen(node->function.innerBlock);
+  function = sdscat(function, innerBlock);
+  sdsfree(innerBlock);
+  return function;
 }
 
 char *codegen_getBinOp(ast_type_binop op) {
