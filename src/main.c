@@ -33,14 +33,17 @@ int main(int argc, char** argv) {
   // parse the code. now we have an ast.
   yyparse();
 
+  // emit c from the ast
+  sds emitted_code = codegen(parsetree);
+
   // switch on the mode
   switch (mode) {
-        printf("%s", codegen(parsetree));
     case C: { // for c
       if (doStdout) { // if we're outputting the emitted c to stdout
+        printf("%s", emitted_code);
       } else {
         FILE *output = fopen(strcat(basename(cmd.argv[0]), ".ir.c"), "w");
-        fprintf(output, "%s", codegen(parsetree));
+        fprintf(output, "%s", emitted_code);
         fclose(output);
       }
       break;
@@ -50,6 +53,8 @@ int main(int argc, char** argv) {
       break;
     }
   }
+
+  sdsfree(emitted_code);
 
   return 0;
 }
