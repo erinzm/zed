@@ -19,7 +19,6 @@ enum {
 } mode;
 
 bool doStdout = false;
-sds outName;
 
 
 void cmdIsDump(command_t *self) {
@@ -35,7 +34,6 @@ void cmdStdOut(command_t *self) {
 }
 
 int main(int argc, char** argv) {
-  outName = sdsnew("a.out");
   mode = C;
   command_t cmd;
   command_init(&cmd, argv[0], "0.1");
