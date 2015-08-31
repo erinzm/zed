@@ -31,12 +31,12 @@ char *codegen_fncall(ast_node *node) {
 
 char *codegen_use(ast_node *node) {
   if (node->use.isC) {
-    sds header = sdsnew(node->use.value);
-    header = sdscat(header, ".h");
-    sds s = sdsnew("#include <");
-    s = sdscat(s, header);
-    s = sdscat(s, ">");
-    return s;
+    sds use = sdsnew("#include <");
+    use = sdscat(use, node->use.value);
+    use = sdscat(use, ".h");
+    use = sdscat(use, ">");
+
+    return use;
   } else {
     return ""; // not implemented yet
   }
