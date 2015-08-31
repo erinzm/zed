@@ -58,10 +58,15 @@ char *codegen_variable(ast_node *node) {
 }
 
 char *codegen_assignment(ast_node *node) {
-  sds s = sdsnew(codegen(node->assignment.lhs));
-  s = sdscat(s, "=");
-  s = sdscat(s, codegen(node->assignment.rhs));
-  return s;
+  sds assignment = sdsnew("");
+  sds variable = sdsnew(codegen(node->assignment.lhs));
+  sds value = sdsnew(codegen(node->assignment.rhs));
+
+  assignment = sdscat(assignment, variable);
+  assignment = sdscat(assignment, "=");
+  assignment = sdscat(assignment, value);
+
+  return assignment;
 }
 
 char *codegen_statements(ast_node *node) {
