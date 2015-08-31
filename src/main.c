@@ -61,6 +61,7 @@ int main(int argc, char** argv) {
     }
   }
 
+  // free the memory of the emitted code
   sdsfree(emitted_code);
 
   return 0;
