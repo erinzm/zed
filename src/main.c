@@ -1,3 +1,7 @@
+/* Zed (originally Compiler In A Week)
+   Copyright 2015 Liam Marshall
+   Licensed under the GNU GPLv3. See LICENSE for details
+   */
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
@@ -23,6 +27,8 @@ bool doStdout = false;
 int main(int argc, char** argv) {
   mode = C; // by default, the mode should be outputting C
 
+  // open the source file
+  FILE *source = fopen(argv[1], "r");
   if (!source) {
     printf("Can't open %s!\n", cmd.argv[0]);
     return 1;
@@ -42,7 +48,8 @@ int main(int argc, char** argv) {
       if (doStdout) { // if we're outputting the emitted c to stdout
         printf("%s", emitted_code);
       } else {
-        FILE *output = fopen(strcat(basename(cmd.argv[0]), ".ir.c"), "w");
+        // open a new file, with the name of the original file + '.ir.c'
+        FILE *output = fopen(strcat(basename(argv[1]), ".ir.c"), "w");
         fprintf(output, "%s", emitted_code);
         fclose(output);
       }
