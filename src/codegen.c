@@ -83,10 +83,12 @@ char *codegen_assignment(ast_node *node) {
 }
 
 char *codegen_statements(ast_node *node) {
-  sds s = sdsnew("");
-  if (node->type == AST_TYPE_BLOCK) s = sdscat(s, "{\n");
+  sds statements = sdsnew("");
+  if (node->type == AST_TYPE_BLOCK) statements = sdscat(statements, "{\n");
   for (unsigned int i = 0; i < node->statements.count; i++) {
-    s = sdscat(s, codegen(node->statements.nodes[i]));
+    sds statement = codegen(node->statements.nodes[i]);
+    statements = sdscat(statements, statement);
+    sdsfree(statement);
     switch((node->statements.nodes[i])->type) {
       case AST_TYPE_USE:
         break;
@@ -95,13 +97,13 @@ char *codegen_statements(ast_node *node) {
       case AST_TYPE_FUNCTION:
         break;
       default:
-        s = sdscat(s, ";");
+        statements = sdscat(statements, ";");
         break;
     }
-    s = sdscat(s, "\n");
+    statements = sdscat(statements, "\n");
   }
-  if (node->type == AST_TYPE_BLOCK) s = sdscat(s, "}");
-  return s;
+  if (node->type == AST_TYPE_BLOCK) statements = sdscat(statements, "}\n");
+  return statements;
 }
 
 char *codegen_function(ast_node *node) {
