@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
   // open the source file
   FILE *source = fopen(argv[1], "r");
   if (!source) {
-    printf("Can't open %s!\n", cmd.argv[0]);
+    printf("Can't open %s!\n", argv[1]);
     return 1;
   }
 
