@@ -87,62 +87,61 @@ ast_node *ast_function_create(char *name, char *type, ast_node *innerBlock, ast_
 }
 
 void dump_ast_node(ast_node *node) {
-	printf("=== node dump ===\n");
 	switch(node->type) {
 		case AST_TYPE_NUMBER:
-			printf("node->type == AST_TYPE_NUMBER\n");
-			INSPECT(node->number.value, "%f");
+			printf("<number value=%f />\n", node->number.value);
 			break;
 		case AST_TYPE_STRING:
-			printf("node->type == AST_TYPE_STRING\n");
-			INSPECT(node->string.value, "%s");
+			printf("<string value=\"%s\" />\n", node->string.value);
 			break;
 		case AST_TYPE_VARIABLE:
-			printf("node->type == AST_TYPE_VARIABLE\n");
-			INSPECT(node->variable.name, "%s");
+			printf("<variable name=\"%s\" type=\"%s\" />", node->variable.name, node->variable.type);
 			break;
 		case AST_TYPE_USE:
-			printf("node->type == AST_TYPE_USE\n");
-			INSPECT(node->use.value, "%s");
-			INSPECT(node->use.isC, "%i");
+			printf("<use thing=\"%s\" isC=\"%s\" />\n", node->use.value, node->use.isC ? "true" : "false");
 			break;
 		case AST_TYPE_BINARY_OP:
-			printf("node->type == AST_TYPE_BINARY_OP\n");
-			INSPECT(node->binary_op.op, "%i");
+			printf("<binop type=%i>\n", node->binary_op.op);
 			dump_ast_node(node->binary_op.lhs);
 			dump_ast_node(node->binary_op.rhs);
+			printf("</binop>");
 			break;
 		case AST_TYPE_FNCALL:
-			printf("node->type == AST_TYPE_FNCALL\n");
-			INSPECT(node->fncall.name, "%s");
+			printf("<fncall name=\"%s\">\n", node->fncall.name);
 			for (unsigned int i = 0; i < node->fncall.argc; i++) {
 				dump_ast_node(node->fncall.args[i]);
 			}
+			printf("</fncall>\n");
 			break;
 		case AST_TYPE_STATEMENTS:
 		case AST_TYPE_BLOCK:
 			if (node->type == AST_TYPE_STATEMENTS) {
-				printf("node->type == AST_TYPE_STATEMENTS\n");
+				printf("<statements>\n");
 			} else if (node->type == AST_TYPE_BLOCK) {
-				printf("node->type == AST_TYPE_BLOCK\n");
+				printf("<block>\n");
 			}
 			for (unsigned int i = 0; i < node->statements.count; i++) {
 				dump_ast_node(node->statements.nodes[i]);
 			}
+			if (node->type == AST_TYPE_STATEMENTS) {
+				printf("</statements>\n");
+			} else if (node->type == AST_TYPE_BLOCK) {
+				printf("</block>\n");
+			}
 			break;
 		case AST_TYPE_FUNCTION:
-			printf("node->type == AST_TYPE_FUNCTION\n");
-			INSPECT(node->function.name, "%s");
-			INSPECT(node->function.type, "%s");
-			dump_ast_node(node->function.innerBlock);
+			printf("<function name=\"%s\" type=\"%s\">\n", node->function.name, node->function.type);
+			printf("<arguments>\n");
 			for (unsigned int i = 0; i < node->function.argc; i++) {
 				dump_ast_node(node->function.arguments[i]);
 			}
+			printf("</arguments>\n");
+			dump_ast_node(node->function.innerBlock);
+			printf("</function>\n");
 			break;
 		default:
 			break;
 	}
-	printf("=== end node dump ===\n");
 }
 
 void ast_node_free(ast_node *node) {
