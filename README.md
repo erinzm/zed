@@ -1,5 +1,5 @@
 # Zed
-[![Build Status](https://travis-ci.org/ArchimedesPi/zed.svg?branch=master)](https://travis-ci.org/ArchimedesPi/zed)
+[![Build Status](https://travis-ci.org/ArchimedesPi/zed.svg?branch=master)](https://travis-ci.org/ArchimedesPi/zed) [![Coverity Scan](https://img.shields.io/coverity/scan/5319.svg)](https://scan.coverity.com/projects/archimedespi-zed)
 
 I just started reading **"Compilers: Principles, Techniques and Tools"**,
 and thought it would be fun to implement a **very** simple compiler.
