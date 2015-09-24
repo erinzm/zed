@@ -60,7 +60,10 @@ int main(int argc, char** argv) {
       break;
     }
   }
-
+  
+  // free the memory of the AST
+  ast_node_free(parsetree);
+  
   // free the memory of the emitted code
   sdsfree(emitted_code);
 
