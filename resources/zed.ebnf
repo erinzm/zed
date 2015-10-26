@@ -1,0 +1,8 @@
+expression = number | string | vector | identifier
+identifier = #'[A-Za-z_]+'
+vector = <'['> (expression|whitespace)* <']'>
+number = #'[0-9.]+'
+string = <'\''> #'[^\']*' <'\''>
+
+(* utilities *)
+<whitespace> = <#'\s+'>
