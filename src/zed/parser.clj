@@ -7,7 +7,8 @@
    (clojure.java.io/resource "zed.ebnf")))
 
 (defn transform-ast
-  [ast] ast)
+  [ast]
+  (insta/transform {:number (fn [number] [:number (read-string number)])} ast))
 
 (defn parse-code
   [code]
