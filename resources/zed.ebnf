@@ -2,7 +2,7 @@ program = (whitespace? statement <';'> whitespace?)*
 statement = bind | expression;
 bind = identifier whitespace? <'='> whitespace? expression;
 expression = number | string | vector | identifier | lambda | (<'('> expression <')'>)
-lambda = <'lambda'> whitespace <'['> arguments <']'> whitespace? <'{'> (whitespace? statement <';'> whitespace?)* <'}'>
+lambda = <'lambda'> whitespace? <'['> arguments <']'> whitespace? <'{'> (whitespace? statement <';'> whitespace?)* <'}'>
 arguments = (whitespace? argument whitespace?)*
 argument = type <'/'> identifier
 type = #'[A-Z][A-Za-z]*'
