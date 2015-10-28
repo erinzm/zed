@@ -8,7 +8,9 @@
 
 (defn transform-ast
   [ast]
-  (insta/transform {:number (fn [number] [:number (read-string number)])} ast))
+  (insta/transform {:number (fn [number] [:number (read-string number)])
+                    :expression identity} ; pourthrough for expressions
+                   ast))
 
 (defn parse-code
   [code]
