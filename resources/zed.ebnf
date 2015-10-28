@@ -1,13 +1,21 @@
 program = (whitespace? statement <';'> whitespace?)*
+
 statement = bind | expression;
 bind = identifier whitespace? <'='> whitespace? expression;
+
 expression = number | string | vector | identifier | lambda | (<'('> expression <')'>)
+
+(* data structures *)
+vector = <'['> (expression|whitespace)* <']'>
 lambda = <'lambda'> whitespace? <'['> arguments <']'> whitespace? <'{'> (whitespace? statement <';'> whitespace?)* <'}'>
+
+(* helpers *)
 arguments = (whitespace? argument whitespace?)*
 argument = type <'/'> identifier
+
+(* raw atomic things *)
 type = #'[A-Z][A-Za-z]*'
 identifier = #'[A-Za-z_]+'
-vector = <'['> (expression|whitespace)* <']'>
 number = #'[0-9.]+'
 string = <'\''> #'[^\']*' <'\''>
 
