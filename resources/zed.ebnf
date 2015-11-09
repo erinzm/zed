@@ -3,13 +3,17 @@ program = (whitespace? statement <';'> whitespace?)*
 statement = bind | expression;
 bind = identifier whitespace? <'='> whitespace? expression;
 
-expression = number | string | vector | identifier | lambda | binary-op | (<'('> expression <')'>)
+expression = number | string | vector | identifier | lambda | op | (<'('> expression <')'>)
 
 (* operations *)
+<op> = binary-op (* general op *)
+binary-op = expression whitespace? operator whitespace? expression
+
+(* kinds of operators *)
 <arithmetic_op> = '+' | '-' | '*' | '/' | '^'
 <datastream_op> = '|>'
+(* compose operators *)
 operator = arithmetic_op | datastream_op
-binary-op = expression whitespace? operator whitespace? expression
 
 (* data structures *)
 vector = <'['> (expression|whitespace)* <']'>
