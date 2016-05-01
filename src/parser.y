@@ -68,7 +68,7 @@ int yylex();
 %left ADDITION SUBTRACTION
 %left MULTIPLICATION DIVISION MODULO
 
-%type <node> expression number identifier variable_declaration variable_assignment function_declaration function_call statement string use block
+%type <node> expression number identifier variable_declaration variable_assignment function_declaration function_call statement string use if block
 %type <fncall_args> function_call_arguments
 %type <statements> statements
 %type <fndecl_args> function_decl_arguments
@@ -94,6 +94,7 @@ statement : variable_declaration EOS { $$ = $1; }
           | variable_assignment  EOS { $$ = $1; }
           | expression           EOS { $$ = $1; }
           | use                  EOS { $$ = $1; }
+          | if                   EOS { $$ = $1; }
           | block                EOS { $$ = $1; }
           ;
 
@@ -132,6 +133,10 @@ function_call_arguments : /* no arguments */ { $$.count = 0; $$.args = NULL; }
                           $1.args = realloc($1.args, sizeof(ast_node*) * $1.count);
                           $1.args[$1.count-1] = $3; $$ = $1;}
                         ;
+
+if : IF expression block { $$ = ast_conditional_create($2, $3, NULL); }
+   | IF expression block ELSE block { $$ = ast_conditional_create($2, $3, $5); }
+   ;
 
 use : USE IDENTIFIER { $$ = ast_use_create($2, false); free($2); }
     | USE LT IDENTIFIER GT { $$ = ast_use_create($3, true); free($3); }

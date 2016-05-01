@@ -91,16 +91,14 @@ char *codegen_statements(ast_node *node) {
     sdsfree(statement);
     switch((node->statements.nodes[i])->type) {
       case AST_TYPE_USE:
-        break;
       case AST_TYPE_BLOCK:
-        break;
       case AST_TYPE_FUNCTION:
+      case AST_TYPE_CONDITIONAL:
         break;
       default:
-        statements = sdscat(statements, ";");
+        statements = sdscat(statements, ";\n");
         break;
     }
-    statements = sdscat(statements, "\n");
   }
   if (node->type == AST_TYPE_BLOCK) statements = sdscat(statements, "}\n");
   return statements;
@@ -123,6 +121,19 @@ char *codegen_function(ast_node *node) {
   function = sdscat(function, innerBlock);
   sdsfree(innerBlock);
   return function;
+}
+
+char *codegen_conditional(ast_node *node) {
+  sds conditional = sdsnew("if (");
+  conditional = sdscat(conditional, codegen(node->conditional.condition));
+  conditional = sdscat(conditional, ")\n");
+  conditional = sdscat(conditional, codegen(node->conditional.trueBranch));
+
+  if (node->conditional.falseBranch != NULL) {
+    conditional = sdscat(conditional, codegen(node->conditional.falseBranch));
+  }
+
+  return conditional;
 }
 
 char *codegen_getBinOp(ast_type_binop op) {
@@ -163,6 +174,8 @@ char *codegen(ast_node *node) {
       return codegen_statements(node);
     case AST_TYPE_FUNCTION:
       return codegen_function(node);
+    case AST_TYPE_CONDITIONAL:
+      return codegen_conditional(node);
     default:
       return sdsnew("");
   }

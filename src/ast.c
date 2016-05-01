@@ -75,6 +75,15 @@ ast_node *ast_statements_create(ast_node **nodes, int count, bool isBlock) {
 	return node;
 }
 
+ast_node *ast_conditional_create(ast_node *condition, ast_node *trueBranch, ast_node *falseBranch) {
+  ast_node *node = STRUCT_INSTANCE(ast_node);
+  node->type = AST_TYPE_CONDITIONAL;
+  node->conditional.condition = condition;
+  node->conditional.trueBranch = trueBranch;
+  node->conditional.falseBranch = falseBranch;
+  return node;
+}
+
 ast_node *ast_function_create(char *name, char *type, ast_node *innerBlock, ast_node **arguments, unsigned int argc) {
 	ast_node *node = STRUCT_INSTANCE(ast_node);
 	node->type = AST_TYPE_FUNCTION;
@@ -139,6 +148,18 @@ void dump_ast_node(ast_node *node) {
 			dump_ast_node(node->function.innerBlock);
 			printf("</function>\n");
 			break;
+    case AST_TYPE_CONDITIONAL:
+      printf("<conditional>\n");
+      printf("<conditon>\n");
+      dump_ast_node(node->conditional.condition);
+      printf("</condition>\n");
+      printf("<trueBranch>\n");
+      dump_ast_node(node->conditional.trueBranch);
+      printf("</trueBranch>\n");
+      printf("<falseBranch>\n");
+      if (node->conditional.falseBranch != NULL) dump_ast_node(node->conditional.falseBranch);
+      printf("</falseBranch>\n");
+      break;
 		default:
 			break;
 	}
@@ -194,6 +215,12 @@ void ast_node_free(ast_node *node) {
 			ast_node_free(node->function.innerBlock);
 			break;
 		}
+    case AST_TYPE_CONDITIONAL: {
+      ast_node_free(node->conditional.condition);
+      ast_node_free(node->conditional.trueBranch);
+      ast_node_free(node->conditional.falseBranch);
+      break;
+    }
 	}
 
 	free(node); // free the rest of the struct

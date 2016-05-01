@@ -26,7 +26,8 @@ typedef enum ast_node_type {
 	AST_TYPE_STATEMENTS,
 	AST_TYPE_BLOCK, /* SUPER IMPORTANT REMINDER DO NOT FORGET: This is ALSO expressed with ast_statements! It's not a seperate type!
 		Just an annotation for ergonomics, and so we don't have to have ast_{statements, block}, because repetition is bad. */
-	AST_TYPE_FUNCTION
+  AST_TYPE_CONDITIONAL,
+	AST_TYPE_FUNCTION,
 } ast_node_type;
 
 typedef enum ast_type_binop {
@@ -34,7 +35,7 @@ typedef enum ast_type_binop {
 	AST_BINOP_SUB,
 	AST_BINOP_MUL,
 	AST_BINOP_DIV,
-	AST_BINOP_MOD
+	AST_BINOP_MOD,
 } ast_type_binop;
 
 typedef struct ast_number {
@@ -77,6 +78,12 @@ typedef struct ast_statements {
 	unsigned int count;
 } ast_statements;
 
+typedef struct ast_conditional {
+  struct ast_node *condition;
+  struct ast_node *trueBranch;
+  struct ast_node *falseBranch;
+} ast_conditional;
+
 typedef struct ast_function {
 	char *name;
 	char *type;
@@ -97,6 +104,7 @@ typedef struct ast_node {
 		ast_fncall fncall;
 		ast_statements statements;
 		ast_function function;
+    ast_conditional conditional;
 	};
 } ast_node;
 
@@ -121,6 +129,8 @@ ast_node *ast_use_create(char *value, bool isC);
 ast_node *ast_assignment_create(ast_node *lhs, ast_node *rhs);
 
 ast_node *ast_function_create(char *name, char *type, ast_node *innerBlock, ast_node **arguments, unsigned int argc);
+
+ast_node *ast_conditional_create(ast_node *condition, ast_node *trueBranch, ast_node *falseBranch);
 
 void dump_ast_node(ast_node *node);
 
