@@ -96,9 +96,10 @@ char *codegen_statements(ast_node *node) {
       case AST_TYPE_CONDITIONAL:
         break;
       default:
-        statements = sdscat(statements, ";\n");
+        statements = sdscat(statements, ";");
         break;
     }
+    statements = sdscat(statements, "\n");
   }
   if (node->type == AST_TYPE_BLOCK) statements = sdscat(statements, "}\n");
   return statements;
