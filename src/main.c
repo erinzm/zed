@@ -97,14 +97,10 @@ int main(int argc, char** argv) {
       if (arguments.doStdout) { // if we're outputting the emitted c to stdout
         printf("%s", emitted_code);
       } else {
-        char *dirc = strdup(arguments.args[0]);
-        char *basec = strdup(arguments.args[0]);
-        char *dname = dirname(dirc);
-        char *bname = basename(basec);
-        char *n_bname = strcat(bname, ".ir.c");
-        char *n_dname = strcat(dname, "/");
-        char *n_path = strcat(n_dname, n_bname);
-        FILE *output = fopen(n_path, "w");
+        char *path = strdup(arguments.args[0]);
+        char *path_ = strdup(arguments.args[0]);
+        char *new_path = sdscat(sdscat(sdsnew(dirname(path)), "/"), sdscat(sdsnew(basename(path_)), ".ir.c"));
+        FILE *output = fopen(new_path, "w");
         fprintf(output, "%s", emitted_code);
         fclose(output);
       }
