@@ -9,5 +9,5 @@ before_install:
   - if [ "$CC" = "gcc" ]; then sudo apt-get install -qqy gcc-4.9; fi
   - if [ "$CC" = "gcc" ]; then export CC="gcc-4.9" CC="gcc-4.9"; fi
 script:
-  - make CC=$CC zed
+  - make CC=$CC zedc
   - make test
