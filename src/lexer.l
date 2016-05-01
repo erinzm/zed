@@ -42,7 +42,7 @@ void yyerror(char *s, ...);
 "<"                     {return LT;}
 ">"                     {return GT;}
 "<="                    {return LTE;}
-"=>"                    {return GTE;}
+">="                    {return GTE;}
   /*arithmetic*/
 "+"                     {return ADDITION;}
 "-"                     {return SUBTRACTION;}

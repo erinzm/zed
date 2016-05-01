@@ -157,6 +157,12 @@ binop : ADDITION { $$ = AST_BINOP_ADD; }
       | MULTIPLICATION { $$ = AST_BINOP_MUL; }
       | DIVISION { $$ = AST_BINOP_DIV; }
       | MODULO { $$ = AST_BINOP_MOD; }
+      | EQ { $$ = AST_BINOP_EQ; }
+      | NEQ { $$ = AST_BINOP_NEQ; }
+      | LT { $$ = AST_BINOP_LT; }
+      | GT { $$ = AST_BINOP_GT; }
+      | LTE { $$ = AST_BINOP_LTE; }
+      | GTE { $$ = AST_BINOP_GTE; }
       ;
 
 expression : OPENPAREN expression CLOSEPAREN { $$ = $2; }

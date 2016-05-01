@@ -67,7 +67,7 @@ char *codegen_variable(ast_node *node) {
     s = sdscat(s, " ");
   }
   s = sdscat(s, node->variable.name);
-  return s; // handling code may go before here, so declaring a new sds isn't as worthless as it seems.
+  return s;
 }
 
 char *codegen_assignment(ast_node *node) {
@@ -148,6 +148,18 @@ char *codegen_getBinOp(ast_type_binop op) {
       return "/";
     case AST_BINOP_MOD:
       return "%";
+    case AST_BINOP_EQ:
+      return "==";
+    case AST_BINOP_NEQ:
+      return "!=";
+    case AST_BINOP_LT:
+      return "<";
+    case AST_BINOP_GT:
+      return ">";
+    case AST_BINOP_LTE:
+      return "<=";
+    case AST_BINOP_GTE:
+      return ">=";
     default:
       return "";
   }

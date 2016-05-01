@@ -36,6 +36,12 @@ typedef enum ast_type_binop {
 	AST_BINOP_MUL,
 	AST_BINOP_DIV,
 	AST_BINOP_MOD,
+  AST_BINOP_EQ,
+  AST_BINOP_NEQ,
+  AST_BINOP_LT,
+  AST_BINOP_GT,
+  AST_BINOP_LTE,
+  AST_BINOP_GTE,
 } ast_type_binop;
 
 typedef struct ast_number {
