@@ -164,6 +164,6 @@ char *codegen(ast_node *node) {
     case AST_TYPE_FUNCTION:
       return codegen_function(node);
     default:
-      return "";
+      return sdsnew("");
   }
 }
