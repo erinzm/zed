@@ -97,8 +97,14 @@ int main(int argc, char** argv) {
       if (arguments.doStdout) { // if we're outputting the emitted c to stdout
         printf("%s", emitted_code);
       } else {
-        // open a new file, with the name of the original file + '.ir.c'
-        FILE *output = fopen(strcat(basename(argv[1]), ".ir.c"), "w");
+        char *dirc = strdup(arguments.args[0]);
+        char *basec = strdup(arguments.args[0]);
+        char *dname = dirname(dirc);
+        char *bname = basename(basec);
+        char *n_bname = strcat(bname, ".ir.c");
+        char *n_dname = strcat(dname, "/");
+        char *n_path = strcat(n_dname, n_bname);
+        FILE *output = fopen(n_path, "w");
         fprintf(output, "%s", emitted_code);
         fclose(output);
       }
