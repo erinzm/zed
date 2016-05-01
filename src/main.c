@@ -87,13 +87,13 @@ int main(int argc, char** argv) {
   yyin = source;
   // parse the code. now we have an ast.
   yyparse();
-
-  // emit c from the ast
-  sds emitted_code = codegen(parsetree);
+  sds emitted_code = NULL;
 
   // switch on the mode
   switch (arguments.output_mode) {
     case C_MODE: { // for c
+      // emit c from the ast
+      emitted_code = codegen(parsetree);
       if (arguments.doStdout) { // if we're outputting the emitted c to stdout
         printf("%s", emitted_code);
       } else {
@@ -114,7 +114,7 @@ int main(int argc, char** argv) {
   ast_node_free(parsetree);
   
   // free the memory of the emitted code
-  sdsfree(emitted_code);
+  if (emitted_code != NULL) sdsfree(emitted_code);
 
   return 0;
 }
