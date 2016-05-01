@@ -108,8 +108,8 @@ variable_declaration : IDENTIFIER IDENTIFIER { $$ = ast_variable_create($2, $1);
 
 variable_assignment : identifier ASSIGN expression { $$ = ast_assignment_create($1, $3); }
 
-function_declaration : FN IDENTIFIER IDENTIFIER OPENPAREN function_decl_arguments CLOSEPAREN block { $$ = ast_function_create($2, $3, $7, $5.args, $5.count);}
-                     | FN IDENTIFIER IDENTIFIER block { $$ = ast_function_create($2, $3, $4, NULL, 0); free($2); free($3); }
+function_declaration : FN IDENTIFIER IDENTIFIER OPENPAREN function_decl_arguments CLOSEPAREN block { $$ = ast_function_create($3, $2, $7, $5.args, $5.count);}
+                     | FN IDENTIFIER IDENTIFIER block { $$ = ast_function_create($3, $2, $4, NULL, 0); free($2); free($3); }
                      | FN IDENTIFIER block { $$ = ast_function_create($2, "void", $3, NULL, 0); free($2);}
                      ;
 
