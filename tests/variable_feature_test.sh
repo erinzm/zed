@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e # Error on fail
 
-./zed tests/testdata/variable.zd
+./zedc tests/testdata/variable.zd

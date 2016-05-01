@@ -15,7 +15,7 @@ DEPSOBJS = $(DEPSSRC:.c=.o)
 
 TESTS=$(wildcard test/*.c)
 
-all: clean zed
+all: clean zedc
 
 
 %.o: %.c
@@ -27,10 +27,10 @@ all: clean zed
 %.c: %.l
 	$(FLEX) $(FLEXFLAGS) -o $@ $<
 
-zed: $(DEPSOBJS) src/util.o src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
+zedc: $(DEPSOBJS) src/util.o src/ast.o src/codegen.o src/parser.o src/lexer.o src/main.o
 	$(CC) -o $@ $^ $(LDFLAGS)
 
-install: zed
+install: zedc
 	install zed $(PREFIX)/bin/zed
 
 .PHONY: test
